@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="twitter:card" content="summary_large_image" /><!-- Begin Jekyll SEO tag v2.6.1 -->
+<title>um produto orientado a dados governamentais: parte 6 | o eu analítico</title>
+<meta name="generator" content="Jekyll v4.1.1" />
+<meta property="og:title" content="um produto orientado a dados governamentais: parte 6" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="o nascimento do py-classifica-legal" />
+<meta property="og:description" content="o nascimento do py-classifica-legal" />
+<link rel="canonical" href="https://netoferraz.github.io/o-eu-analitico/data%20product/streamlit/deploy/heroku/2020/08/04/gov-data-product-p6.html" />
+<meta property="og:url" content="https://netoferraz.github.io/o-eu-analitico/data%20product/streamlit/deploy/heroku/2020/08/04/gov-data-product-p6.html" />
+<meta property="og:site_name" content="o eu analítico" />
+<meta property="og:image" content="https://netoferraz.github.io/o-eu-analitico/images/posts/govdata_poc_6/govdata_poc_minor_p6.png" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2020-08-04T00:00:00-05:00" />
+<script type="application/ld+json">
+{"mainEntityOfPage":{"@type":"WebPage","@id":"https://netoferraz.github.io/o-eu-analitico/data%20product/streamlit/deploy/heroku/2020/08/04/gov-data-product-p6.html"},"url":"https://netoferraz.github.io/o-eu-analitico/data%20product/streamlit/deploy/heroku/2020/08/04/gov-data-product-p6.html","@type":"BlogPosting","headline":"um produto orientado a dados governamentais: parte 6","dateModified":"2020-08-04T00:00:00-05:00","datePublished":"2020-08-04T00:00:00-05:00","image":"https://netoferraz.github.io/o-eu-analitico/images/posts/govdata_poc_6/govdata_poc_minor_p6.png","description":"o nascimento do py-classifica-legal","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/o-eu-analitico/assets/css/style.css"><link type="application/atom+xml" rel="alternate" href="https://netoferraz.github.io/o-eu-analitico/feed.xml" title="o eu analítico" /><!-- the google_analytics_id gets auto inserted from the config file -->
+
+
+
+<script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','//www.google-analytics.com/analytics.js','ga');ga('create','UA-134149444-2','auto');ga('require','displayfeatures');ga('send','pageview');</script>
+
+<link rel="shortcut icon" type="image/x-icon" href="/o-eu-analitico/images/favicon.ico"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Primer/15.2.0/primer.css" integrity="sha512-xTz2ys4coGAOz8vuV1NcQBkgVmKhsSEtjbqyMJbBHRplFuvKIUo6xhLHpAyPt9mfR6twHJgn9OgVLuqOvjeBhg==" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog==" crossorigin="anonymous" /><script src="https://hypothes.is/embed.js" async></script>
+
+<script>
+function wrap_img(fn) {
+    if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading") {
+        var elements = document.querySelectorAll(".post img");
+        Array.prototype.forEach.call(elements, function(el, i) {
+            if (el.getAttribute("title") && (el.className != "emoji")) {
+                const caption = document.createElement('figcaption');
+                var node = document.createTextNode(el.getAttribute("title"));
+                caption.appendChild(node);
+                const wrapper = document.createElement('figure');
+                wrapper.className = 'image';
+                el.parentNode.insertBefore(wrapper, el);
+                el.parentNode.removeChild(el);
+                wrapper.appendChild(el);
+                wrapper.appendChild(caption);
+            }
+        });
+    } else { document.addEventListener('DOMContentLoaded', fn); }
+}
+window.onload = wrap_img;
+</script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function(){
+    // add link icon to anchor tags
+    var elem = document.querySelectorAll(".anchor-link")
+    elem.forEach(e => (e.innerHTML = '<i class="fas fa-link fa-xs"></i>'));
+    });
+</script>
+</head>
+<body><header class="site-header">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/o-eu-analitico/">o eu analítico</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/o-eu-analitico/about/">sobre</a><a class="page-link" href="/o-eu-analitico/search/">pesquisa</a><a class="page-link" href="/o-eu-analitico/categories/">tags</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">um produto orientado a dados governamentais: parte 6</h1><p class="page-description">o nascimento do py-classifica-legal</p><p class="post-meta post-meta-title"><time class="dt-published" datetime="2020-08-04T00:00:00-05:00" itemprop="datePublished">
+        Aug 4, 2020
+      </time>
+       • <span class="read-time" title="Estimated read time">
+    
+    
+      7 min read
+    
+</span></p>
+
+    
+      <p class="category-tags"><i class="fas fa-tags category-tags-icon"></i></i> 
+      
+        <a class="category-tags-link" href="/o-eu-analitico/categories/#data product">data product</a>
+        &nbsp;
+      
+        <a class="category-tags-link" href="/o-eu-analitico/categories/#streamlit">streamlit</a>
+        &nbsp;
+      
+        <a class="category-tags-link" href="/o-eu-analitico/categories/#deploy">deploy</a>
+        &nbsp;
+      
+        <a class="category-tags-link" href="/o-eu-analitico/categories/#heroku">heroku</a>
+        
+      
+      </p>
+    
+
+    
+      
+        <div class="pb-5 d-flex flex-wrap flex-justify-end">
+          <div class="px-2">
+
+    <a href="https://github.com/netoferraz/o-eu-analitico/tree/master/_notebooks/2020-08-04-gov-data-product-p6.ipynb" role="button" target="_blank">
+<img class="notebook-badge-image" src="/o-eu-analitico/assets/badges/github.svg" alt="View On GitHub">
+    </a>
+</div>
+
+          <div class="px-2">
+    <a href="https://mybinder.org/v2/gh/netoferraz/o-eu-analitico/master?filepath=_notebooks%2F2020-08-04-gov-data-product-p6.ipynb" target="_blank">
+        <img class="notebook-badge-image" src="/o-eu-analitico/assets/badges/binder.svg" alt="Open In Binder"/>
+    </a>
+</div>
+
+          <div class="px-2">
+    <a href="https://colab.research.google.com/github/netoferraz/o-eu-analitico/blob/master/_notebooks/2020-08-04-gov-data-product-p6.ipynb" target="_blank">
+        <img class="notebook-badge-image" src="/o-eu-analitico/assets/badges/colab.svg" alt="Open In Colab"/>
+    </a>
+</div>
+        </div>
+      </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <!--
+#################################################
+### THIS FILE WAS AUTOGENERATED! DO NOT EDIT! ###
+#################################################
+# file to edit: _notebooks/2020-08-04-gov-data-product-p6.ipynb
+-->
+
+<div class="container" id="notebook-container">
+        
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Esse é o sétimo, e último, post de uma série de como construir um produto data-driven de ponta a ponta, caso você ainda não tenha acompanhado os demais, abaixo segue uma síntese com os respectivos links 😀.</p>
+<ol>
+<li>Em <a href="/o-eu-analitico/o-eu-analitico/dados%20abertos/governo/crawler/2020/07/07/metadados-normativos-federais.html">metadados de normas jurídicas federais</a> coletamos dados do sistema LexML.</li>
+<li>Em <a href="/o-eu-analitico/o-eu-analitico/machine%20learning/dados%20abertos/data%20product/2020/07/12/gov-data-product.html">um produto orientado a dados governamentais: parte 1</a> realizamos uma análise exploratória dos dados e definimos um recorte e um escopo para os dados do projeto.</li>
+<li>Em <a href="/o-eu-analitico/o-eu-analitico/machine%20learning/dados%20abertos/data%20product/2020/07/20/gov-data-product-p2.html">um produto orientado a dados governamentais: parte 2</a> realizamos a definição dos dos datasets de treino, validação e teste</li>
+<li>Em <a href="/o-eu-analitico/o-eu-analitico/machine%20learning/data%20science/data%20product/2020/07/26/gov-data-product-p3.html">um produto orientado a dados governamentais: parte 3</a> detalhamos tudo que não deu certo no treinamento de modelos de machine learning.</li>
+<li>Em <a href="/o-eu-analitico/o-eu-analitico/deep%20learning/nlp/data%20product/2020/07/30/gov-data-product-p4.html">um produto orientado a dados governamentais: parte 4</a> apresentamos o treinamento de um modelo de deep learning</li>
+<li>Em <a href="/o-eu-analitico/o-eu-analitico/deep%20learning/nlp/data%20product/fastapi/docker/cloud/azure/2020/08/03/gov-data-product-p5.html">um produto orientado a dados governamentais: parte 5</a> fizemos o deploy do nosso classificador de textos infraconstitucionais.</li>
+</ol>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>O último passo de toda prova de conceito é fazer uma apresentação das funcionalidades do projeto para os <em>stakeholders</em> 🕴️. Por mais que tenhamos uma api funcional, ela é o <em>backend</em> da nossa solução. Portanto, temos que criar uma interface de usuário para o nosso produto, isto é, o <em>frontend</em> da aplicação 💻. Depois de alguma pesquisa, decidimos construi-lo com o <a href="https://www.streamlit.io/"><em>streamlit</em></a>. É um framework novo, que sequer chegou a sua versão 1.0, todavia, apresenta uma capacidade incrível de produzir aplicativos webs com poucas linhas de código e ainda em python que é a linguagem que utilizamos em todo o projeto.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Antes de iniciar a construção do <em>frontend</em>, vamos definir uma função que será utilizada pelo backend para realizar a consulta a <code>api</code>.</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">List</span>
+<span class="kn">import</span> <span class="nn">requests</span>
+<span class="kn">import</span> <span class="nn">json</span>
+<span class="k">def</span> <span class="nf">parse_ementa</span><span class="p">(</span><span class="n">ementa</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Realiza a consulta a api a partir do texto de uma ementa. </span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">url</span> <span class="o">=</span> <span class="s1">&#39;https://pylegalclassifier.azurewebsites.net/predict&#39;</span>
+    <span class="n">payload</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;ementa&quot;</span> <span class="p">:</span> <span class="n">ementa</span><span class="p">}</span>
+    <span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">json</span><span class="o">=</span><span class="n">payload</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">r</span><span class="o">.</span><span class="n">status_code</span> <span class="o">==</span> <span class="mi">200</span><span class="p">:</span>
+        <span class="n">response</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="n">text</span><span class="p">)</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;tags&#39;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">response</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="kc">None</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>O <em>streamlit</em> como ainda não não publicou sua versão de api estável (1.0) nos indica que é um produto em maturação e evolução rápida. Portanto, algumas funcionalidades ainda estão ausentes ou mesmo em construção. Uma dessas envidências é a discussão de como o framework <a href="https://discuss.streamlit.io/t/alternative-implementation-of-session-state/799">gerencia estados nos seus componentes</a>. Nos faremos uso de um chunk de código disponibilizado nesse <a href="https://gist.github.com/tvst/036da038ab3e999a64497f42de966a92">gist</a> para alterar algumas funcionalidades da biblioteca, só recomendo o código para os mais entusiastas.</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<details class="description">
+      <summary class="btn btn-sm" data-open="Hide Code" data-close="Show Code"></summary>
+        <p><div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#SessionState.py</span>
+<span class="kn">import</span> <span class="nn">streamlit.ReportThread</span> <span class="k">as</span> <span class="nn">ReportThread</span>
+<span class="kn">from</span> <span class="nn">streamlit.server.Server</span> <span class="kn">import</span> <span class="n">Server</span>
+
+<span class="k">class</span> <span class="nc">SessionState</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;A new SessionState object.</span>
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        **kwargs : any</span>
+<span class="sd">            Default values for the session state.</span>
+<span class="sd">        Example</span>
+<span class="sd">        -------</span>
+<span class="sd">        &gt;&gt;&gt; session_state = SessionState(user_name=&#39;&#39;, favorite_color=&#39;black&#39;)</span>
+<span class="sd">        &gt;&gt;&gt; session_state.user_name = &#39;Mary&#39;</span>
+<span class="sd">        &#39;&#39;</span>
+<span class="sd">        &gt;&gt;&gt; session_state.favorite_color</span>
+<span class="sd">        &#39;black&#39;</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">val</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="nb">setattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">val</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">get</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Gets a SessionState object for the current session.</span>
+<span class="sd">    Creates a new object if necessary.</span>
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    **kwargs : any</span>
+<span class="sd">        Default values you want to add to the session state, if we&#39;re creating a</span>
+<span class="sd">        new one.</span>
+<span class="sd">    Example</span>
+<span class="sd">    -------</span>
+<span class="sd">    &gt;&gt;&gt; session_state = get(user_name=&#39;&#39;, favorite_color=&#39;black&#39;)</span>
+<span class="sd">    &gt;&gt;&gt; session_state.user_name</span>
+<span class="sd">    &#39;&#39;</span>
+<span class="sd">    &gt;&gt;&gt; session_state.user_name = &#39;Mary&#39;</span>
+<span class="sd">    &gt;&gt;&gt; session_state.favorite_color</span>
+<span class="sd">    &#39;black&#39;</span>
+<span class="sd">    Since you set user_name above, next time your script runs this will be the</span>
+<span class="sd">    result:</span>
+<span class="sd">    &gt;&gt;&gt; session_state = get(user_name=&#39;&#39;, favorite_color=&#39;black&#39;)</span>
+<span class="sd">    &gt;&gt;&gt; session_state.user_name</span>
+<span class="sd">    &#39;Mary&#39;</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Hack to get the session object from Streamlit.</span>
+
+    <span class="n">ctx</span> <span class="o">=</span> <span class="n">ReportThread</span><span class="o">.</span><span class="n">get_report_ctx</span><span class="p">()</span>
+
+    <span class="n">this_session</span> <span class="o">=</span> <span class="kc">None</span>
+    
+    <span class="n">current_server</span> <span class="o">=</span> <span class="n">Server</span><span class="o">.</span><span class="n">get_current</span><span class="p">()</span>
+    <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">current_server</span><span class="p">,</span> <span class="s1">&#39;_session_infos&#39;</span><span class="p">):</span>
+        <span class="c1"># Streamlit &lt; 0.56        </span>
+        <span class="n">session_infos</span> <span class="o">=</span> <span class="n">Server</span><span class="o">.</span><span class="n">get_current</span><span class="p">()</span><span class="o">.</span><span class="n">_session_infos</span><span class="o">.</span><span class="n">values</span><span class="p">()</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">session_infos</span> <span class="o">=</span> <span class="n">Server</span><span class="o">.</span><span class="n">get_current</span><span class="p">()</span><span class="o">.</span><span class="n">_session_info_by_id</span><span class="o">.</span><span class="n">values</span><span class="p">()</span>
+
+    <span class="k">for</span> <span class="n">session_info</span> <span class="ow">in</span> <span class="n">session_infos</span><span class="p">:</span>
+        <span class="n">s</span> <span class="o">=</span> <span class="n">session_info</span><span class="o">.</span><span class="n">session</span>
+        <span class="k">if</span> <span class="p">(</span>
+            <span class="c1"># Streamlit &lt; 0.54.0</span>
+            <span class="p">(</span><span class="nb">hasattr</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="s1">&#39;_main_dg&#39;</span><span class="p">)</span> <span class="ow">and</span> <span class="n">s</span><span class="o">.</span><span class="n">_main_dg</span> <span class="o">==</span> <span class="n">ctx</span><span class="o">.</span><span class="n">main_dg</span><span class="p">)</span>
+            <span class="ow">or</span>
+            <span class="c1"># Streamlit &gt;= 0.54.0</span>
+            <span class="p">(</span><span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="s1">&#39;_main_dg&#39;</span><span class="p">)</span> <span class="ow">and</span> <span class="n">s</span><span class="o">.</span><span class="n">enqueue</span> <span class="o">==</span> <span class="n">ctx</span><span class="o">.</span><span class="n">enqueue</span><span class="p">)</span>
+        <span class="p">):</span>
+            <span class="n">this_session</span> <span class="o">=</span> <span class="n">s</span>
+
+    <span class="k">if</span> <span class="n">this_session</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span>
+            <span class="s2">&quot;Oh noes. Couldn&#39;t get your Streamlit Session object&quot;</span>
+            <span class="s1">&#39;Are you doing something fancy with threads?&#39;</span><span class="p">)</span>
+
+    <span class="c1"># Got the session object! Now let&#39;s attach some state into it.</span>
+
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">this_session</span><span class="p">,</span> <span class="s1">&#39;_custom_session_state&#39;</span><span class="p">):</span>
+        <span class="n">this_session</span><span class="o">.</span><span class="n">_custom_session_state</span> <span class="o">=</span> <span class="n">SessionState</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">this_session</span><span class="o">.</span><span class="n">_custom_session_state</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+</p>
+    </details>
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>O próximo passo será a construção da página para o app (<code>app.py</code>). Além disso, o nosso produto precisa de um nome, que após alguns segundos de reflexão 🤣 decidimos chamar 🧠 py-classifica-legal 🤖. Abaixo encontra-se, todo o código da nossa aplicação, incríveis 40 linhas de código 😲!</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">streamlit</span> <span class="k">as</span> <span class="nn">st</span>
+<span class="kn">import</span> <span class="nn">SessionState</span>
+<span class="kn">from</span> <span class="nn">api.response</span> <span class="kn">import</span> <span class="n">parse_ementa</span>
+
+<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+    <span class="sd">&quot;&quot;&quot; Classificador de normas infraconstitucionais&quot;&quot;&quot;</span>
+    <span class="n">multi_tags</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;ACORDO INTERNACIONAL&#39;</span><span class="p">,</span> <span class="s1">&#39;ALTERAÇÃO&#39;</span><span class="p">,</span> <span class="s1">&#39;AMBITO&#39;</span><span class="p">,</span> <span class="s1">&#39;APROVAÇÃO&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;AREA PRIORITARIA&#39;</span><span class="p">,</span> <span class="s1">&#39;ATO&#39;</span><span class="p">,</span> <span class="s1">&#39;AUTORIZAÇÃO&#39;</span><span class="p">,</span> <span class="s1">&#39;BRASIL&#39;</span><span class="p">,</span> <span class="s1">&#39;COMPETENCIA&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;COMPOSIÇÃO&#39;</span><span class="p">,</span> <span class="s1">&#39;CONCESSÃO&#39;</span><span class="p">,</span> <span class="s1">&#39;CORRELAÇÃO&#39;</span><span class="p">,</span> <span class="s1">&#39;CREDITO SUPLEMENTAR&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;CRIAÇÃO&#39;</span><span class="p">,</span> <span class="s1">&#39;CRITERIOS&#39;</span><span class="p">,</span> <span class="s1">&#39;DECLARAÇÃO&#39;</span><span class="p">,</span> <span class="s1">&#39;DESAPROPRIAÇÃO&#39;</span><span class="p">,</span> <span class="s1">&#39;DESTINAÇÃO&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;DISPOSITIVOS&#39;</span><span class="p">,</span> <span class="s1">&#39;DOTAÇÃO ORÇAMENTARIA&#39;</span><span class="p">,</span> <span class="s1">&#39;EMPRESA DE TELECOMUNICAÇÕES&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;ESTADO DE MINAS GERAIS MG&#39;</span><span class="p">,</span> <span class="s1">&#39;ESTADO DE SÃO PAULO SP&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;ESTADO DO PARANA PR&#39;</span><span class="p">,</span> <span class="s1">&#39;ESTADO DO RIO GRANDE DO SUL RS&#39;</span><span class="p">,</span> <span class="s1">&#39;EXECUTIVO&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;EXECUÇÃO&#39;</span><span class="p">,</span> <span class="s1">&#39;FIXAÇÃO&#39;</span><span class="p">,</span> <span class="s1">&#39;FUNCIONAMENTO&#39;</span><span class="p">,</span> <span class="s1">&#39;HIPOTESE&#39;</span><span class="p">,</span> <span class="s1">&#39;IMOVEL RURAL&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;INSTITUTO NACIONAL DE COLONIZAÇÃO E REFORMA AGRARIA INCRA&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;INTERESSE SOCIAL&#39;</span><span class="p">,</span> <span class="s1">&#39;MUNICIPIO&#39;</span><span class="p">,</span> <span class="s1">&#39;NORMAS&#39;</span><span class="p">,</span> <span class="s1">&#39;OBJETIVO&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;ORÇAMENTO DA SEGURIDADE SOCIAL&#39;</span><span class="p">,</span> <span class="s1">&#39;ORÇAMENTO FISCAL&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;PAIS ESTRANGEIRO&#39;</span><span class="p">,</span> <span class="s1">&#39;RADIODIFUSÃO&#39;</span><span class="p">,</span> <span class="s1">&#39;REFORMA AGRARIA&#39;</span><span class="p">,</span> <span class="s1">&#39;REFORÇO&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;RENOVAÇÃO&#39;</span><span class="p">,</span> <span class="s1">&#39;SERVIÇO&#39;</span><span class="p">,</span> <span class="s1">&#39;TEXTO&#39;</span><span class="p">,</span> <span class="s1">&#39;UNIÃO FEDERAL&#39;</span><span class="p">,</span> <span class="s1">&#39;UTILIDADE PUBLICA&#39;</span><span class="p">]</span>
+    <span class="n">st</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;🧠 py-classifica-legal 🤖&quot;</span><span class="p">)</span>
+    <span class="n">st</span><span class="o">.</span><span class="n">subheader</span><span class="p">(</span><span class="s2">&quot;Um classificador para normas infraconstitucionais ⚖️.&quot;</span><span class="p">)</span>
+    <span class="n">st</span><span class="o">.</span><span class="n">markdown</span><span class="p">(</span><span class="s2">&quot;O *py-classifica-legal* foi treinado com uma base de mais de 30.000 normas legais. O intuito do programa é auxiliar em uma melhor governança de dados públicos, por meio de sugestões de classificações de normas infraconstitucionais a partir de suas respectivas ementas.&quot;</span><span class="p">)</span>
+    <span class="n">st</span><span class="o">.</span><span class="n">markdown</span><span class="p">(</span><span class="s2">&quot;Você pode consultar alguns exemplos de ementas clicando &lt;a href=&#39;http://www4.planalto.gov.br/legislacao/portal-legis/legislacao-1/decretos1/2020-decretos&#39; target=&#39;_blank&#39; style=&#39;color: #f97b6f;&#39;&gt; aqui.&lt;/a&gt;&quot;</span><span class="p">,</span> <span class="n">unsafe_allow_html</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">session_state</span> <span class="o">=</span> <span class="n">SessionState</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">button_sent</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="n">input_ementa</span> <span class="o">=</span> <span class="n">st</span><span class="o">.</span><span class="n">text_area</span><span class="p">(</span><span class="s2">&quot;Insira o texto da ementa&quot;</span><span class="p">,</span> <span class="s2">&quot;Digite aqui.&quot;</span><span class="p">)</span>
+    <span class="n">button_sent</span> <span class="o">=</span> <span class="n">st</span><span class="o">.</span><span class="n">button</span><span class="p">(</span><span class="s2">&quot;Classificar&quot;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">button_sent</span><span class="p">:</span>
+        <span class="n">session_state</span><span class="o">.</span><span class="n">button_sent</span> <span class="o">=</span> <span class="kc">True</span>
+    <span class="k">if</span> <span class="n">session_state</span><span class="o">.</span><span class="n">button_sent</span><span class="p">:</span>
+        <span class="n">get_tags</span> <span class="o">=</span> <span class="n">parse_ementa</span><span class="p">(</span><span class="n">input_ementa</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">get_tags</span><span class="p">:</span>
+            <span class="n">st</span><span class="o">.</span><span class="n">multiselect</span><span class="p">(</span><span class="s1">&#39;Tags&#39;</span><span class="p">,</span> <span class="n">multi_tags</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="n">get_tags</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">st</span><span class="o">.</span><span class="n">multiselect</span><span class="p">(</span><span class="s1">&#39;Tags&#39;</span><span class="p">,</span> <span class="n">multi_tags</span><span class="p">)</span>
+            <span class="n">st</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s2">&quot;Não há sugestão de classificação para a ementa consultada.&quot;</span><span class="p">)</span>
+    <span class="n">st</span><span class="o">.</span><span class="n">markdown</span><span class="p">(</span><span class="s2">&quot;&lt;center&gt;&lt;blockquote cite=&#39;https://netoferraz.github.io/o-eu-analitico/&#39;&gt;&lt;p style=&#39;color: #bfc5d3;&#39;&gt;&lt;i&gt;py-classifica-legal é uma prova de conceito desenvolvida por &lt;a href=&#39;https://netoferraz.github.io/o-eu-analitico/&#39; target=&#39;_blank&#39; style=&#39;color: #f97b6f;&#39;&gt; José Ferraz Neto&lt;/a&gt;.&lt;/i&gt;&lt;/p&gt;&lt;/blockquote&gt;&lt;/center&gt;&quot;</span><span class="p">,</span> <span class="n">unsafe_allow_html</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">main</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Assim, podemos iniciar o servidor do streamlit e verificar a nossa aplicação.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><img src="/o-eu-analitico/images/copied_from_nb/img/frontend-gov-data-product/streamlit-start-app.png" alt="streamlit-start-app" /></p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Com o servidor iniciado, podemos consultar a aplicação rodando localmente em <code>http://localhost:8501</code>. E assim, o <code>py-classifica-legal</code> ganha vida com uma interface simples e direita ao que se propõe. Como estamos em um estágio de prova de conceito, a velocidade da entrega é algo relevante, portanto, só queremos validar a ideia com os patrocionadores do projeto. Assim, qualquer melhoria deve ser realizada a posteriori.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><img src="/o-eu-analitico/images/copied_from_nb/img/frontend-gov-data-product/py-classifica-legal-ui.png" alt="py-classifica-legal-ui" /></p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Abaixo, podemos ver o resultado de consulta de uma ementa no app.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><img src="/o-eu-analitico/images/copied_from_nb/img/frontend-gov-data-product/frontend-em-uso.png" alt="frontend-em-uso" /></p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Por fim, precisamos realizar o deploy da aplicação. Para essa etapa, decidimos utilizar a plataform do <a href="https://www.heroku.com/">heroku</a>. Começaremos definindo as dependências do projeto por meio do arquivo <code>requirements.txt</code></p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="requirements.txt">requirements.txt<a class="anchor-link" href="#requirements.txt"> </a></h3><p><code>streamlit==0.64.0</code></p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Em seguida vamos construir um arquivo com algumas variáveis de configuração do projeto <code>setup.sh</code>.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="setup.sh">setup.sh<a class="anchor-link" href="#setup.sh"> </a></h3><div class="highlight"><pre><span></span>mkdir -p ~/.streamlit/
+
+<span class="nb">echo</span> <span class="s2">&quot;\</span>
+<span class="s2">[general]\n\</span>
+<span class="s2">email = \&quot;seuemail@provedor\&quot;\n\</span>
+<span class="s2">&quot;</span> &gt; ~/.streamlit/credentials.toml
+
+<span class="nb">echo</span> <span class="s2">&quot;\</span>
+<span class="s2">[server]\n\</span>
+<span class="s2">headless = true\n\</span>
+<span class="s2">enableCORS=false\n\</span>
+<span class="s2">port = </span><span class="nv">$PORT</span><span class="s2">\n\</span>
+<span class="s2">&quot;</span> &gt; ~/.streamlit/config.toml
+</pre></div>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Por fim, defineremos um arquivo <code>Procfile</code> que é utilizado pela plataforma do <code>heroku</code>.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Procfile">Procfile<a class="anchor-link" href="#Procfile"> </a></h3><p><code>web: sh setup.sh &amp;&amp; streamlit run app.py</code></p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Em termos de arquivos de configuração, finalizamos. Agora temos que criar um app no <code>heroku</code> e realizar o deploy. O primeiro passo é, é fazer o login pelo <a href="https://devcenter.heroku.com/articles/heroku-cli">heroku-cli</a>, pelo comando a seguir:</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><code>heroku login</code></p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Realizado a devida autenticação, iremos criar o app pelo comando:</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><code>heroku create py-classifica-legal</code></p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>É válido ressaltar, que o diretório do projeto deve estar sob versionsamento, por exemplo, git. Uma vez criado o app pelo <code>heroku-cli</code> ele adicionará um remote ao seu repositório local, como apresentado abaixo.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><img src="/o-eu-analitico/images/copied_from_nb/img/frontend-gov-data-product/heroku-remote.png" alt="git-remote" /></p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Estando todos os arquivos devidamente comitados, basta realizar o push para o <code>heroku</code> pelo comando:</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><code>git push heroku master</code></p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>O processo de push iniciará automaticamente um build e havendo sucesso você receberá uma confirmação de deploy concluído e a url para acessar o app 🥳🥳🥳.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><img src="/o-eu-analitico/images/copied_from_nb/img/frontend-gov-data-product/sucess-deploy.png" alt="sucess-deploy" /></p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><div class="tenor-gif-embed" data-postid="7531207" data-share-method="host" data-width="100%" data-aspect-ratio="2.7906976744186047"><a href="https://tenor.com/view/voila-gif-7531207">VOILÀ ! GIF</a> from <a href="https://tenor.com/search/voila-gifs">Voila GIFs</a></div><script type="text/javascript" async="" src="https://tenor.com/embed.js"></script></p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<center><a href="https://py-classifica-legal.herokuapp.com/" target="_blank" style="color: #f97b6f;font-size: xx-large">https://py-classifica-legal.herokuapp.com/</a></center>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Finalmente, chegamos ao final do nosso projeto!! Foi uma incrível jornada que realizamos em cerca de 1 mês. Agradeço a todos que acompanharam até aqui e em breve espero ter novos projetos para desenvolvermos juntos. Até a próxima 🤓  !!</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><strong>NOTA 17/02/2021</strong>: O aplicativo apresentado nessa sequência de postagens não encontra-se mais online. Caso tenham interesse em acessar ao modelo, ele está disponível nesse <a href="https://github.com/netoferraz/backend_datagovprod">repositório</a> para ser realizado o deploy local.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><div class="tenor-gif-embed" data-postid="9143464" data-share-method="host" data-width="100%" data-aspect-ratio="1.0"><a href="https://tenor.com/view/goodbye-bye-byebye-seeyou-gif-9143464">再见 GIF</a> from <a href="https://tenor.com/search/goodbye-gifs">Goodbye GIFs</a></div><script type="text/javascript" async="" src="https://tenor.com/embed.js"></script></p>
+
+</div>
+</div>
+</div>
+</div>
+
+
+
+  </div><!-- from https://github.com/utterance/utterances -->
+<script src="https://utteranc.es/client.js"
+        repo="netoferraz/o-eu-analitico"
+        issue-term="title"
+        label="blogpost-comment"
+        theme="github-light"
+        crossorigin="anonymous"
+        async>
+</script><a class="u-url" href="/o-eu-analitico/data%20product/streamlit/deploy/heroku/2020/08/04/gov-data-product-p6.html" hidden></a>
+</article>
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/o-eu-analitico/"></data>
+
+  <div class="wrapper">
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col">
+        <p class="feed-subscribe">
+          <a href="/o-eu-analitico/feed.xml">
+            <svg class="svg-icon orange">
+              <use xlink:href="/o-eu-analitico/assets/minima-social-icons.svg#rss"></use>
+            </svg><span>Subscribe</span>
+          </a>
+        </p>
+      </div>
+      <div class="footer-col">
+        <p>registros de uma jornada para uma vida mais data driven.</p>
+      </div>
+    </div>
+
+    <div class="social-links"><ul class="social-media-list"><li><a rel="me" href="https://github.com/netoferraz" title="netoferraz"><svg class="svg-icon grey"><use xlink:href="/o-eu-analitico/assets/minima-social-icons.svg#github"></use></svg></a></li><li><a rel="me" href="https://twitter.com/zeneto" title="zeneto"><svg class="svg-icon grey"><use xlink:href="/o-eu-analitico/assets/minima-social-icons.svg#twitter"></use></svg></a></li></ul>
+</div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>

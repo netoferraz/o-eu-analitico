@@ -1,0 +1,938 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="twitter:card" content="summary_large_image" /><!-- Begin Jekyll SEO tag v2.6.1 -->
+<title>metadados de normas jurídicas federais | o eu analítico</title>
+<meta name="generator" content="Jekyll v4.1.1" />
+<meta property="og:title" content="metadados de normas jurídicas federais" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="um dataset estruturado para aprendizado de máquina" />
+<meta property="og:description" content="um dataset estruturado para aprendizado de máquina" />
+<link rel="canonical" href="https://netoferraz.github.io/o-eu-analitico/dados%20abertos/governo/crawler/2020/07/07/metadados-normativos-federais.html" />
+<meta property="og:url" content="https://netoferraz.github.io/o-eu-analitico/dados%20abertos/governo/crawler/2020/07/07/metadados-normativos-federais.html" />
+<meta property="og:site_name" content="o eu analítico" />
+<meta property="og:image" content="https://netoferraz.github.io/o-eu-analitico/images/posts/py_lexml_2/pylexml-thumb.png" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2020-07-07T00:00:00-05:00" />
+<script type="application/ld+json">
+{"mainEntityOfPage":{"@type":"WebPage","@id":"https://netoferraz.github.io/o-eu-analitico/dados%20abertos/governo/crawler/2020/07/07/metadados-normativos-federais.html"},"url":"https://netoferraz.github.io/o-eu-analitico/dados%20abertos/governo/crawler/2020/07/07/metadados-normativos-federais.html","@type":"BlogPosting","headline":"metadados de normas jurídicas federais","dateModified":"2020-07-07T00:00:00-05:00","datePublished":"2020-07-07T00:00:00-05:00","image":"https://netoferraz.github.io/o-eu-analitico/images/posts/py_lexml_2/pylexml-thumb.png","description":"um dataset estruturado para aprendizado de máquina","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/o-eu-analitico/assets/css/style.css"><link type="application/atom+xml" rel="alternate" href="https://netoferraz.github.io/o-eu-analitico/feed.xml" title="o eu analítico" /><!-- the google_analytics_id gets auto inserted from the config file -->
+
+
+
+<script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','//www.google-analytics.com/analytics.js','ga');ga('create','UA-134149444-2','auto');ga('require','displayfeatures');ga('send','pageview');</script>
+
+<link rel="shortcut icon" type="image/x-icon" href="/o-eu-analitico/images/favicon.ico"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Primer/15.2.0/primer.css" integrity="sha512-xTz2ys4coGAOz8vuV1NcQBkgVmKhsSEtjbqyMJbBHRplFuvKIUo6xhLHpAyPt9mfR6twHJgn9OgVLuqOvjeBhg==" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog==" crossorigin="anonymous" /><script src="https://hypothes.is/embed.js" async></script>
+
+<script>
+function wrap_img(fn) {
+    if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading") {
+        var elements = document.querySelectorAll(".post img");
+        Array.prototype.forEach.call(elements, function(el, i) {
+            if (el.getAttribute("title") && (el.className != "emoji")) {
+                const caption = document.createElement('figcaption');
+                var node = document.createTextNode(el.getAttribute("title"));
+                caption.appendChild(node);
+                const wrapper = document.createElement('figure');
+                wrapper.className = 'image';
+                el.parentNode.insertBefore(wrapper, el);
+                el.parentNode.removeChild(el);
+                wrapper.appendChild(el);
+                wrapper.appendChild(caption);
+            }
+        });
+    } else { document.addEventListener('DOMContentLoaded', fn); }
+}
+window.onload = wrap_img;
+</script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function(){
+    // add link icon to anchor tags
+    var elem = document.querySelectorAll(".anchor-link")
+    elem.forEach(e => (e.innerHTML = '<i class="fas fa-link fa-xs"></i>'));
+    });
+</script>
+</head>
+<body><header class="site-header">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/o-eu-analitico/">o eu analítico</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/o-eu-analitico/about/">sobre</a><a class="page-link" href="/o-eu-analitico/search/">pesquisa</a><a class="page-link" href="/o-eu-analitico/categories/">tags</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">metadados de normas jurídicas federais</h1><p class="page-description">um dataset estruturado para aprendizado de máquina</p><p class="post-meta post-meta-title"><time class="dt-published" datetime="2020-07-07T00:00:00-05:00" itemprop="datePublished">
+        Jul 7, 2020
+      </time>
+       • <span class="read-time" title="Estimated read time">
+    
+    
+      10 min read
+    
+</span></p>
+
+    
+      <p class="category-tags"><i class="fas fa-tags category-tags-icon"></i></i> 
+      
+        <a class="category-tags-link" href="/o-eu-analitico/categories/#dados abertos">dados abertos</a>
+        &nbsp;
+      
+        <a class="category-tags-link" href="/o-eu-analitico/categories/#governo">governo</a>
+        &nbsp;
+      
+        <a class="category-tags-link" href="/o-eu-analitico/categories/#crawler">crawler</a>
+        
+      
+      </p>
+    
+
+    
+      
+        <div class="pb-5 d-flex flex-wrap flex-justify-end">
+          <div class="px-2">
+
+    <a href="https://github.com/netoferraz/o-eu-analitico/tree/master/_notebooks/2020-07-07-metadados-normativos-federais.ipynb" role="button" target="_blank">
+<img class="notebook-badge-image" src="/o-eu-analitico/assets/badges/github.svg" alt="View On GitHub">
+    </a>
+</div>
+
+          <div class="px-2">
+    <a href="https://mybinder.org/v2/gh/netoferraz/o-eu-analitico/master?filepath=_notebooks%2F2020-07-07-metadados-normativos-federais.ipynb" target="_blank">
+        <img class="notebook-badge-image" src="/o-eu-analitico/assets/badges/binder.svg" alt="Open In Binder"/>
+    </a>
+</div>
+
+          <div class="px-2">
+    <a href="https://colab.research.google.com/github/netoferraz/o-eu-analitico/blob/master/_notebooks/2020-07-07-metadados-normativos-federais.ipynb" target="_blank">
+        <img class="notebook-badge-image" src="/o-eu-analitico/assets/badges/colab.svg" alt="Open In Colab"/>
+    </a>
+</div>
+        </div>
+      </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <ul class="section-nav">
+<li class="toc-entry toc-h1"><a href="#1.-contexto">1. contexto </a></li>
+<li class="toc-entry toc-h1"><a href="#2.-script">2. script </a></li>
+<li class="toc-entry toc-h1"><a href="#3.-publicação-do-dataset">3. publicação do dataset </a></li>
+<li class="toc-entry toc-h1"><a href="#4.-aplicação-em-aprendizado-de-máquina">4. aplicação em aprendizado de máquina </a></li>
+</ul><!--
+#################################################
+### THIS FILE WAS AUTOGENERATED! DO NOT EDIT! ###
+#################################################
+# file to edit: _notebooks/2020-07-07-metadados-normativos-federais.ipynb
+-->
+
+<div class="container" id="notebook-container">
+        
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="1.-contexto">
+<a class="anchor" href="#1.-contexto" aria-hidden="true"><span class="octicon octicon-link"></span></a>1. contexto<a class="anchor-link" href="#1.-contexto"> </a>
+</h1>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Em meio aos desafios cotidianos da pandemia do covid-19, dois <a href="https://pt.wikipedia.org/wiki/Arquitetura_da_escolha"><em>nudges</em></a> me fizeram operacionalizar a coleta desse dataset. O primeiro deles foi a abertura de uma <a href="https://github.com/netoferraz/py-lexml-acervo/issues/1"><em>issue</em></a> no repositório do projeto <a href="https://github.com/netoferraz/py-lexml-acervo">py-lexml-acervo</a> que menciona explicitamente a existência de uma "ficha catalográfica" de normas jurídicas federais disponibilizada pelo próprio projeto <a href="https://www.lexml.gov.br/">LexML</a>. O segundo "empurrãozinho" trata-se da abertura de um <a href="https://suap.enap.gov.br/portaldoaluno/curso/918/?area=9">curso</a> de aprendizado de máquina ministrado pelo <a href="https://twitter.com/ErickMuzart">Erick Muzart</a> e um dos pré-requisitos da inscrição é a submissão de um pré-projeto como evidenciado abaixo:</p>
+<blockquote>
+<p>Na Justificativa de inscrição, sugere-se que o candidato apresente o esboço de um problema que enfrenta e possíveis caminhos que vislumbra para sua solução, em poucas linhas.</p>
+</blockquote>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Esse conjunto de metadados disponibilizado no formato JSON-LD, adiciona novas informações aos que eu já havia <a href="https://www.kaggle.com/lexmlacervo/lexml-brasil-acervo">coletado</a> na api do acervo do projeto LexML, abaixo um exemplo dos campos disponíveis para um decreto.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><strong>Metadados do Decreto nº 10.217 de 30/01/2020</strong></p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="p">[</span>
+    <span class="p">{</span>
+        <span class="s2">"legislationPassedBy"</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">"@type"</span><span class="p">:</span> <span class="s2">"GovernmentOrganization"</span><span class="p">,</span>
+            <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"Congresso Nacional"</span><span class="p">,</span>
+            <span class="s2">"@id"</span><span class="p">:</span> <span class="s2">"https://pt.wikipedia.org/wiki/Congresso_Nacional_do_Brasil"</span>
+        <span class="p">},</span>
+        <span class="s2">"keywords"</span><span class="p">:</span> <span class="s2">"ALTERAÇÃO, ORGANIZAÇÃO ADMINISTRATIVA, QUADRO DEMONSTRATIVO, REMANEJAMENTO, CARGO EM COMISSÃO, FUNÇÃO GRATIFICADA, FUNÇÃO COMISSIONADA DO PODER EXECUTIVO (FCPE), AMBITO, COMISSÃO DE VALORES MOBILIARIOS, MINISTERIO DA ECONOMIA"</span><span class="p">,</span>
+        <span class="s2">"@type"</span><span class="p">:</span> <span class="s2">"Legislation"</span><span class="p">,</span>
+        <span class="s2">"legislationIdentifier"</span><span class="p">:</span> <span class="s2">"urn:lex:br:federal:decreto:2020-01-30;10217"</span><span class="p">,</span>
+        <span class="s2">"about"</span><span class="p">:</span> <span class="p">[</span>
+            <span class="p">{</span>
+                <span class="s2">"@type"</span><span class="p">:</span> <span class="s2">"Thing"</span><span class="p">,</span>
+                <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"EXECUTIVO"</span>
+            <span class="p">},</span>
+            <span class="p">{</span>
+                <span class="s2">"@type"</span><span class="p">:</span> <span class="s2">"Thing"</span><span class="p">,</span>
+                <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"ORGANIZAÇÃO ADMINISTRATIVA"</span>
+            <span class="p">},</span>
+            <span class="p">{</span>
+                <span class="s2">"@type"</span><span class="p">:</span> <span class="s2">"Thing"</span><span class="p">,</span>
+                <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"PESSOAL"</span>
+            <span class="p">}</span>
+        <span class="p">],</span>
+        <span class="s2">"inLanguage"</span><span class="p">:</span> <span class="s2">"pt-BR"</span><span class="p">,</span>
+        <span class="s2">"description"</span><span class="p">:</span> <span class="s2">"Altera o Decreto nº 6.382, de 27 de fevereiro de 2008, que aprova a Estrutura Regimental e o Quadro Demonstrativo dos Cargos em Comissão e das Funções Gratificadas da Comissão de Valores Mobiliários, e remaneja cargos em comissão e funções de confiança."</span><span class="p">,</span>
+        <span class="s2">"legislationChanges"</span><span class="p">:</span> <span class="p">[</span>
+            <span class="p">{</span>
+                <span class="s2">"@type"</span><span class="p">:</span> <span class="s2">"Legislation"</span><span class="p">,</span>
+                <span class="s2">"description"</span><span class="p">:</span> <span class="s2">"Decreto nº 6.382 de 27/02/2008 (alteração permanente)"</span><span class="p">,</span>
+                <span class="s2">"@id"</span><span class="p">:</span> <span class="s2">"http://www.lexml.gov.br/urn/urn:lex:br:federal:decreto:2008-02-27;6382"</span>
+            <span class="p">},</span>
+            <span class="p">{</span>
+                <span class="s2">"@type"</span><span class="p">:</span> <span class="s2">"Legislation"</span><span class="p">,</span>
+                <span class="s2">"description"</span><span class="p">:</span> <span class="s2">"Decreto nº 8.965 de 19/01/2017 (alteração permanente)"</span><span class="p">,</span>
+                <span class="s2">"@id"</span><span class="p">:</span> <span class="s2">"http://www.lexml.gov.br/urn/urn:lex:br:federal:decreto:2017-01-19;8965"</span>
+            <span class="p">},</span>
+            <span class="p">{</span>
+                <span class="s2">"@type"</span><span class="p">:</span> <span class="s2">"Legislation"</span><span class="p">,</span>
+                <span class="s2">"description"</span><span class="p">:</span> <span class="s2">"Decreto nº 9.436 de 03/07/2018 (alteração permanente)"</span><span class="p">,</span>
+                <span class="s2">"@id"</span><span class="p">:</span> <span class="s2">"http://www.lexml.gov.br/urn/urn:lex:br:federal:decreto:2018-07-03;9436"</span>
+            <span class="p">}</span>
+        <span class="p">],</span>
+        <span class="s2">"alternateName"</span><span class="p">:</span> <span class="p">[</span>
+            <span class="s2">"DEC-10217-2020-01-30"</span>
+        <span class="p">],</span>
+        <span class="s2">"spatialCoverage"</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">"address"</span><span class="p">:</span> <span class="p">{</span>
+                <span class="s2">"addressCountry"</span><span class="p">:</span> <span class="s2">"BR"</span><span class="p">,</span>
+                <span class="s2">"@type"</span><span class="p">:</span> <span class="s2">"PostalAddress"</span>
+            <span class="p">},</span>
+            <span class="s2">"@type"</span><span class="p">:</span> <span class="s2">"Country"</span><span class="p">,</span>
+            <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"Brasil"</span><span class="p">,</span>
+            <span class="s2">"@id"</span><span class="p">:</span> <span class="s2">"https://pt.wikipedia.org/wiki/Brasil"</span>
+        <span class="p">},</span>
+        <span class="s2">"encoding"</span><span class="p">:</span> <span class="p">[</span>
+            <span class="p">{</span>
+                <span class="s2">"contentUrl"</span><span class="p">:</span> <span class="s2">"http://legis.senado.leg.br/legislacao/ListaTextoSigen.action?norma=31912090&amp;amp;id=31912097&amp;amp;idBinario=31912101&amp;amp;mime=application/rtf"</span><span class="p">,</span>
+                <span class="s2">"@type"</span><span class="p">:</span> <span class="s2">"LegislationObject"</span><span class="p">,</span>
+                <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"Publicação Original [Decreto nº 10.217 de 30/01/2020]  [Diário Oficial da União  de 31/01/2020] (p. 34, col. 2)"</span><span class="p">,</span>
+                <span class="s2">"legislationLegalValue"</span><span class="p">:</span> <span class="s2">"UnofficialLegalValue"</span><span class="p">,</span>
+                <span class="s2">"@id"</span><span class="p">:</span> <span class="s2">"http://legis.senado.leg.br/legislacao/ListaTextoSigen.action?norma=31912090&amp;amp;id=31912097&amp;amp;idBinario=31912101&amp;amp;mime=application/rtf"</span><span class="p">,</span>
+                <span class="s2">"fileFormat"</span><span class="p">:</span> <span class="s2">"http://www.iana.org/assignments/media-types/text/html"</span>
+            <span class="p">}</span>
+        <span class="p">],</span>
+        <span class="s2">"sdDatePublished"</span><span class="p">:</span> <span class="s2">"2020-02-02"</span><span class="p">,</span>
+        <span class="s2">"sdLicense"</span><span class="p">:</span> <span class="s2">"http://creativecommons.org/licenses/by/4.0/"</span><span class="p">,</span>
+        <span class="s2">"@context"</span><span class="p">:</span> <span class="s2">"http://schema.org/"</span><span class="p">,</span>
+        <span class="s2">"legislationJurisdiction"</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">"address"</span><span class="p">:</span> <span class="p">{</span>
+                <span class="s2">"addressCountry"</span><span class="p">:</span> <span class="s2">"BR"</span><span class="p">,</span>
+                <span class="s2">"@type"</span><span class="p">:</span> <span class="s2">"PostalAddress"</span>
+            <span class="p">},</span>
+            <span class="s2">"@type"</span><span class="p">:</span> <span class="s2">"Country"</span><span class="p">,</span>
+            <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"Brasil"</span><span class="p">,</span>
+            <span class="s2">"@id"</span><span class="p">:</span> <span class="s2">"https://pt.wikipedia.org/wiki/Brasil"</span>
+        <span class="p">},</span>
+        <span class="s2">"sdPublisher"</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">"@type"</span><span class="p">:</span> <span class="s2">"GovernmentOrganization"</span><span class="p">,</span>
+            <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"Rede de Informação Legislativa e Jurídica Brasileira"</span><span class="p">,</span>
+            <span class="s2">"@id"</span><span class="p">:</span> <span class="s2">"https://www.lexml.gov.br/"</span>
+        <span class="p">},</span>
+        <span class="s2">"datePublished"</span><span class="p">:</span> <span class="s2">"2020-01-31"</span><span class="p">,</span>
+        <span class="s2">"license"</span><span class="p">:</span> <span class="s2">"http://creativecommons.org/licenses/by/4.0/"</span><span class="p">,</span>
+        <span class="s2">"dateCreated"</span><span class="p">:</span> <span class="s2">"2020-01-30"</span><span class="p">,</span>
+        <span class="s2">"legislationDate"</span><span class="p">:</span> <span class="s2">"2020-01-30"</span><span class="p">,</span>
+        <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"Decreto nº 10.217 de 30/01/2020"</span><span class="p">,</span>
+        <span class="s2">"legislationType"</span><span class="p">:</span> <span class="s2">"https://pt.wikipedia.org/wiki/Decreto_legislativo"</span><span class="p">,</span>
+        <span class="s2">"@id"</span><span class="p">:</span> <span class="s2">"http://www.lexml.gov.br/urn/urn:lex:br:federal:decreto:2020-01-30;10217"</span>
+    <span class="p">}</span>
+<span class="p">]</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Esses dados são disponibilizados ao acessar a <strong>urn</strong> de um determinado normativo no domínio do site LexML, como exemplificado <a href="https://search.google.com/structured-data/testing-tool?hl=pt-BR#url=https%3A%2F%2Fwww.lexml.gov.br%2Furn%2Furn%3Alex%3Abr%3Afederal%3Adecreto%3A2020-01-30%3B10217">aqui</a>. Como eu já havia coletado os dados em xml do acervo do LexML eu já tinha os registros das urns de normas federais que seriam necessárias para iniciar a coleta desses dados adicionais.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="2.-script">
+<a class="anchor" href="#2.-script" aria-hidden="true"><span class="octicon octicon-link"></span></a>2. <em>script</em><a class="anchor-link" href="#2.-script"> </a>
+</h1>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>A publicação dos dados do <a href="https://www.kaggle.com/lexmlacervo/lexml-brasil-acervo">acervo</a> foram realizadas em JSON por ser um formato mais amplamente utilizado nos dias de hoje e, portanto, o escolhemos para coletar todas as urns que precisamos.</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">bs4</span>
+<span class="kn">import</span> <span class="nn">requests</span>
+<span class="kn">from</span> <span class="nn">requests.exceptions</span> <span class="kn">import</span> <span class="ne">ConnectionError</span>
+<span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
+<span class="kn">import</span> <span class="nn">json</span>
+<span class="kn">from</span> <span class="nn">json.decoder</span> <span class="kn">import</span> <span class="n">JSONDecodeError</span>
+<span class="kn">from</span> <span class="nn">time</span> <span class="kn">import</span> <span class="n">sleep</span>
+<span class="kn">from</span> <span class="nn">loguru</span> <span class="kn">import</span> <span class="n">logger</span>
+<span class="kn">from</span> <span class="nn">tinydb</span> <span class="kn">import</span> <span class="n">TinyDB</span><span class="p">,</span> <span class="n">Query</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Iterable</span>
+<span class="kn">import</span> <span class="nn">re</span>
+<span class="kn">import</span> <span class="nn">gc</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Definimos a raiz do domínio do portal <a href="https://www.lexml.gov.br/">LexML</a> onde serão feitas as requisições e armazenamos todos os arquivos json que serão utilizados para coletar as urns que serão utilizadas nas requisições.</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">urns</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="s2">"./data/federal/"</span><span class="p">)</span>
+<span class="n">urns</span> <span class="o">=</span> <span class="n">urns</span><span class="o">.</span><span class="n">rglob</span><span class="p">(</span><span class="s2">"*.json"</span><span class="p">)</span>
+<span class="n">LOG_FILE</span> <span class="o">=</span> <span class="s2">"./log/coleta_metadados_normativos.log"</span>
+<span class="n">logger</span><span class="o">.</span><span class="n">add</span><span class="p">(</span>
+    <span class="n">LOG_FILE</span><span class="p">,</span> <span class="nb">format</span><span class="o">=</span><span class="s2">"{time:YYYY-MM-DD HH:mm:ss} | </span><span class="si">{file}</span><span class="s2"> </span><span class="si">{level}</span><span class="s2"> | </span><span class="si">{line}</span><span class="s2"> | </span><span class="si">{message}</span><span class="s2">"</span>
+<span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Em seguida podemos iterar nos arquivos, coletar as urns de cada objeto e assim fazer a chamada da função <code>get_metadata</code> que será responsável pela coleta dos dados.</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">urn_retry</span> <span class="o">=</span> <span class="p">{}</span> <span class="c1">#container para armazenar uma lógica para retry de requisições </span>
+<span class="k">for</span> <span class="n">file_</span> <span class="ow">in</span> <span class="n">urns</span><span class="p">:</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">file_</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">"utf8"</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+        <span class="n">dados_acervo</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+        <span class="n">lista_urns</span> <span class="o">=</span> <span class="p">[</span><span class="n">u</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"urn"</span><span class="p">)</span> <span class="k">for</span> <span class="n">u</span> <span class="ow">in</span> <span class="n">dados_acervo</span><span class="p">]</span>
+        <span class="k">for</span> <span class="n">index</span><span class="p">,</span> <span class="n">urn</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">lista_urns</span><span class="p">):</span>
+            <span class="n">get_metadata</span><span class="p">(</span><span class="n">urn</span><span class="o">=</span><span class="n">urn</span><span class="p">,</span> <span class="o">**</span><span class="p">{</span><span class="s2">"foldername"</span><span class="p">:</span> <span class="n">file_</span><span class="p">,</span> <span class="s2">"index"</span><span class="p">:</span> <span class="n">index</span><span class="p">})</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>A função <code>get_metadata</code> será responsável por realização uma requisição <code>get</code> a url formada pela <code>BASE_URL</code> concatenada a <code>urn</code> dos normativos, o objeto alvo da nossa coleta é um <code>json</code> que encontra-se encapsulado em uma tag <code>&lt;script&gt;</code>. Abaixo, apresentamos o código da função.</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">get_metadata</span><span class="p">(</span><span class="n">urn</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="n">BASE_URL</span> <span class="o">=</span> <span class="s2">"https://www.lexml.gov.br/urn"</span>
+    <span class="k">global</span> <span class="n">urn_retry</span>
+    <span class="k">if</span> <span class="n">urn</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">urn_retry</span><span class="p">:</span>
+        <span class="n">urn_retry</span><span class="p">[</span><span class="n">urn</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">foldername</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"foldername"</span><span class="p">)</span>
+    <span class="n">index</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"index"</span><span class="p">)</span>
+    <span class="n">sleep</span><span class="p">(</span><span class="mf">0.5</span><span class="p">)</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">urn_retry</span><span class="p">[</span><span class="n">urn</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">BASE_URL</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">urn</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+    <span class="k">except</span> <span class="ne">ConnectionError</span><span class="p">:</span>
+        <span class="n">sleep</span><span class="p">(</span><span class="mi">30</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">urn_retry</span><span class="p">[</span><span class="n">urn</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">5</span><span class="p">:</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">critical</span><span class="p">(</span>
+                <span class="sa">f</span><span class="s2">"O programa será encerrrado por excesso de requests para a mesma urn."</span>
+            <span class="p">)</span>
+            <span class="n">exit</span><span class="p">()</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">get_metadata</span><span class="p">(</span><span class="n">urn</span><span class="o">=</span><span class="n">urn</span><span class="p">,</span> <span class="o">**</span><span class="p">{</span><span class="s2">"foldername"</span><span class="p">:</span> <span class="n">file_</span><span class="p">,</span> <span class="s2">"index"</span><span class="p">:</span> <span class="n">index</span><span class="p">})</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">r</span><span class="o">.</span><span class="n">status_code</span> <span class="o">==</span> <span class="mi">200</span><span class="p">:</span>
+            <span class="n">soup</span> <span class="o">=</span> <span class="n">bs4</span><span class="o">.</span><span class="n">BeautifulSoup</span><span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="n">text</span><span class="p">,</span> <span class="n">features</span><span class="o">=</span><span class="s2">"html.parser"</span><span class="p">)</span>
+            <span class="n">scripts</span> <span class="o">=</span> <span class="n">soup</span><span class="o">.</span><span class="n">find_all</span><span class="p">(</span><span class="s2">"script"</span><span class="p">)</span>
+            <span class="n">tag_script</span> <span class="o">=</span> <span class="p">[</span>
+                <span class="nb">str</span><span class="p">(</span><span class="n">s</span><span class="p">)</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">scripts</span> <span class="k">if</span> <span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="s2">"application\/ld\+json"</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">s</span><span class="p">))</span>
+            <span class="p">]</span>
+            <span class="k">if</span> <span class="n">tag_script</span><span class="p">:</span>
+                <span class="n">tag_script</span> <span class="o">=</span> <span class="n">tag_script</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+                <span class="n">first_slice</span> <span class="o">=</span> <span class="n">tag_script</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s2">"["</span><span class="p">)</span>
+                <span class="n">last_slice</span> <span class="o">=</span> <span class="n">tag_script</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s2">"&lt;/script&gt;"</span><span class="p">)</span>
+                <span class="k">try</span><span class="p">:</span>
+                    <span class="n">metadata</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">tag_script</span><span class="p">[</span><span class="n">first_slice</span><span class="p">:</span><span class="n">last_slice</span><span class="p">])</span>
+                <span class="k">except</span> <span class="n">JSONDecodeError</span><span class="p">:</span>
+                    <span class="k">try</span><span class="p">:</span>
+                        <span class="n">first_slice</span> <span class="o">=</span> <span class="n">tag_script</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s2">"{"</span><span class="p">)</span>
+                        <span class="n">last_slice</span> <span class="o">=</span> <span class="n">tag_script</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s2">"&lt;/script&gt;"</span><span class="p">)</span>
+                        <span class="n">metadata</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span>
+                            <span class="s2">"["</span> <span class="o">+</span> <span class="n">tag_script</span><span class="p">[</span><span class="n">first_slice</span><span class="p">:</span><span class="n">last_slice</span><span class="p">]</span> <span class="o">+</span> <span class="s2">"]"</span>
+                        <span class="p">)</span>
+                    <span class="k">except</span> <span class="n">JSONDecodeError</span><span class="p">:</span>
+                        <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Erro na conversão em JSON da urn </span><span class="si">{</span><span class="n">urn</span><span class="si">}</span><span class="s2">."</span><span class="p">)</span>
+                        <span class="k">pass</span>
+                    <span class="k">else</span><span class="p">:</span>
+                        <span class="n">save_file</span><span class="p">(</span>
+                            <span class="n">data</span><span class="o">=</span><span class="n">metadata</span><span class="p">,</span>
+                            <span class="n">filename</span><span class="o">=</span><span class="n">index</span><span class="p">,</span>
+                            <span class="n">foldername</span><span class="o">=</span><span class="n">foldername</span><span class="p">,</span>
+                            <span class="o">**</span><span class="p">{</span><span class="s2">"urn"</span><span class="p">:</span> <span class="n">urn</span><span class="p">},</span>
+                        <span class="p">)</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">save_file</span><span class="p">(</span>
+                        <span class="n">data</span><span class="o">=</span><span class="n">metadata</span><span class="p">,</span>
+                        <span class="n">filename</span><span class="o">=</span><span class="n">index</span><span class="p">,</span>
+                        <span class="n">foldername</span><span class="o">=</span><span class="n">foldername</span><span class="p">,</span>
+                        <span class="o">**</span><span class="p">{</span><span class="s2">"urn"</span><span class="p">:</span> <span class="n">urn</span><span class="p">},</span>
+                    <span class="p">)</span>
+
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">"A urn </span><span class="si">{</span><span class="n">urn</span><span class="si">}</span><span class="s2"> não possui metadados."</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Requisição para urn </span><span class="si">{</span><span class="n">urn</span><span class="si">}</span><span class="s2"> com status code </span><span class="si">{</span><span class="n">r</span><span class="o">.</span><span class="n">status_code</span><span class="si">}</span><span class="s2">."</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Por último, mas não menos importante, implementamos a função <code>save_file</code> que será responsável por persistir em disco nossos dados.</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">save_file</span><span class="p">(</span><span class="n">data</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span> <span class="n">filename</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">foldername</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="n">urn</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"urn"</span><span class="p">)</span>
+    <span class="n">get_year_folder</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">foldername</span><span class="p">)</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">"_"</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">"."</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">BASE_PATH</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="sa">f</span><span class="s2">"./data/metadados/</span><span class="si">{</span><span class="n">get_year_folder</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+    <span class="n">BASE_PATH</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">parents</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">BASE_PATH</span> <span class="o">=</span> <span class="n">BASE_PATH</span> <span class="o">/</span> <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">get_year_folder</span><span class="si">}</span><span class="s2">_</span><span class="si">{</span><span class="n">filename</span><span class="si">}</span><span class="s2">.json"</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">BASE_PATH</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s2">"w"</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">"utf8"</span><span class="p">)</span> <span class="k">as</span> <span class="n">_</span><span class="p">:</span>
+            <span class="n">json</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">ensure_ascii</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Erro no dump para urn </span><span class="si">{</span><span class="n">urn</span><span class="si">}</span><span class="s2">."</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">success</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Metadados da urn </span><span class="si">{</span><span class="n">urn</span><span class="si">}</span><span class="s2"> salvo com sucesso."</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Agora, podemos agregar os dados em uma solução de banco de dados leve orientada a documentos como o <code>Tinydb</code> de forma que podemos consultar os dados de maneira estruturada. Primeramente, vamos estruturar uma função que irá gravar os dados no banco.</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">insert_into_db</span><span class="p">(</span><span class="n">list_of_files</span><span class="p">:</span> <span class="n">Iterable</span><span class="p">,</span> <span class="n">db</span><span class="p">:</span> <span class="n">TinyDB</span><span class="p">,</span> <span class="n">key</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="n">container</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">list_of_files</span><span class="p">:</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">container</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">500000</span><span class="p">:</span>
+            <span class="n">db</span><span class="o">.</span><span class="n">insert_multiple</span><span class="p">(</span><span class="n">container</span><span class="p">)</span>
+            <span class="n">container</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="n">gc</span><span class="o">.</span><span class="n">collect</span><span class="p">()</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="s2">"r"</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">"utf8"</span><span class="p">)</span> <span class="k">as</span> <span class="n">_</span><span class="p">:</span>
+            <span class="n">data</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">_</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">data</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">key</span> <span class="o">==</span> <span class="s2">"metadados"</span><span class="p">:</span>
+                    <span class="k">try</span><span class="p">:</span>
+                        <span class="n">d</span><span class="p">[</span><span class="s2">"keywords"</span><span class="p">]</span> <span class="o">=</span> <span class="n">d</span><span class="p">[</span><span class="s2">"keywords"</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">","</span><span class="p">)</span>
+                    <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
+                        <span class="nb">print</span><span class="p">(</span>
+                            <span class="sa">f</span><span class="s2">"Não foi possível encontrar o campo keywords no arquivo </span><span class="si">{</span><span class="n">f</span><span class="si">}</span><span class="s2">."</span>
+                        <span class="p">)</span>
+
+                <span class="n">container</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">d</span><span class="p">)</span>
+
+    <span class="n">db</span><span class="o">.</span><span class="n">insert_multiple</span><span class="p">(</span><span class="n">container</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Por fim, podemos agora listar os arquivos a serem inseridos no banco e fazer uma chamada a função recém criada. Além disso, os metadados do acervo do portal LexML haviam sido publicados no <a href="https://www.kaggle.com/lexmlacervo/lexml-brasil-acervo">kaggle</a> de forma desagregada, isto é, foi disponibilizados vários arquivos <code>json</code>. Portanto, vamos organizá-los em um único arquivo de banco de dados para facilitar o seu uso e consulta.</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">db_metadados</span> <span class="o">=</span> <span class="n">TinyDB</span><span class="p">(</span><span class="s2">"./data/db/metadados.json"</span><span class="p">)</span> <span class="c1">#instância do tinydb para os metadados de normas federais</span>
+<span class="n">files_metadados</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="s2">"./data/metadados/"</span><span class="p">)</span>
+<span class="n">files_metadados</span> <span class="o">=</span> <span class="n">files_metadados</span><span class="o">.</span><span class="n">rglob</span><span class="p">(</span><span class="s2">"*.json"</span><span class="p">)</span> <span class="c1">#arquivos json dos metadados das normas federais</span>
+
+<span class="n">db_acervo</span> <span class="o">=</span> <span class="n">TinyDB</span><span class="p">(</span><span class="s2">"./data/db/acervo.json"</span><span class="p">)</span> <span class="c1">#instância do tinydb para os dados do acervo LexML.</span>
+<span class="n">files_acervo</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="s2">"./data/json/"</span><span class="p">)</span>
+<span class="n">files_acervo</span> <span class="o">=</span> <span class="n">files_acervo</span><span class="o">.</span><span class="n">rglob</span><span class="p">(</span><span class="s2">"*.json"</span><span class="p">)</span> <span class="c1">#arquivos json do acervo LexML</span>
+
+<span class="n">params</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">"metadados"</span><span class="p">:</span> <span class="p">(</span><span class="n">db_metadados</span><span class="p">,</span> <span class="n">files_metadados</span><span class="p">),</span>
+    <span class="s2">"acervo"</span><span class="p">:</span> <span class="p">(</span><span class="n">db_acervo</span><span class="p">,</span> <span class="n">files_acervo</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">data</span> <span class="ow">in</span> <span class="n">params</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+    <span class="n">insert_into_db</span><span class="p">(</span><span class="n">list_of_files</span><span class="o">=</span><span class="n">data</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">db</span><span class="o">=</span><span class="n">data</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">key</span><span class="o">=</span><span class="n">key</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Uma vez carregado os dados, podemos conferir quantos normativos federais tiveram seus metadados coletados, e assim chegamos a informação do número de 34.352 normas.</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">total_normativos</span> <span class="o">=</span> <span class="n">db_metadados</span><span class="o">.</span><span class="n">all</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Para exemplificar o uso da api de query do <code>TinyDB</code> podemos determinar quantas normas foram publicadas no ano de 2020 e concluir que foram ao todo 472.</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">norma</span> <span class="o">=</span> <span class="n">Query</span><span class="p">()</span>
+<span class="n">normas_2020</span> <span class="o">=</span> <span class="n">db_metadados</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">norma</span><span class="p">[</span><span class="s1">'datePublished'</span><span class="p">]</span><span class="o">.</span><span class="n">matches</span><span class="p">(</span><span class="s1">'(2020)-[0-9]+-[0-9]+'</span><span class="p">))</span>
+<span class="n">num_normas_2020_pubs</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">normas_2020</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Abaixo, apresentamos o resultado dos metadados referentes ao <code>Decreto nº 10.197 de 02/01/2020</code> que é o primeiro registro do resultado da query acima.</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="p">{</span>
+    <span class="s2">"legislationPassedBy"</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">"@type"</span><span class="p">:</span> <span class="s2">"GovernmentOrganization"</span><span class="p">,</span>
+        <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"Congresso Nacional"</span><span class="p">,</span>
+        <span class="s2">"@id"</span><span class="p">:</span> <span class="s2">"https://pt.wikipedia.org/wiki/Congresso_Nacional_do_Brasil"</span>
+    <span class="p">},</span>
+    <span class="s2">"keywords"</span><span class="p">:</span> <span class="p">[</span>
+        <span class="s2">"ALTERAÇÃO"</span><span class="p">,</span>
+        <span class="s2">"NORMAS"</span><span class="p">,</span>
+        <span class="s2">"SISTEMA"</span><span class="p">,</span>
+        <span class="s2">"INTERNET"</span><span class="p">,</span>
+        <span class="s2">"INTEGRAÇÃO"</span><span class="p">,</span>
+        <span class="s2">"ATUAÇÃO"</span><span class="p">,</span>
+        <span class="s2">"ORGÃO PUBLICO"</span><span class="p">,</span>
+        <span class="s2">"ADMINISTRAÇÃO DIRETA"</span><span class="p">,</span>
+        <span class="s2">"ENTIDADE"</span><span class="p">,</span>
+        <span class="s2">"ADMINISTRAÇÃO INDIRETA"</span><span class="p">,</span>
+        <span class="s2">"AMBITO"</span><span class="p">,</span>
+        <span class="s2">"UNIÃO FEDERAL"</span><span class="p">,</span>
+        <span class="s2">"OBJETIVO"</span><span class="p">,</span>
+        <span class="s2">"RESOLUÇÃO"</span><span class="p">,</span>
+        <span class="s2">"CONFLITO"</span><span class="p">,</span>
+        <span class="s2">"CONSUMIDOR"</span>
+    <span class="p">],</span>
+    <span class="s2">"@type"</span><span class="p">:</span> <span class="s2">"Legislation"</span><span class="p">,</span>
+    <span class="s2">"legislationIdentifier"</span><span class="p">:</span> <span class="s2">"urn:lex:br:federal:decreto:2020-01-02;10197"</span><span class="p">,</span>
+    <span class="s2">"about"</span><span class="p">:</span> <span class="p">[</span>
+        <span class="p">{</span>
+            <span class="s2">"@type"</span><span class="p">:</span> <span class="s2">"Thing"</span><span class="p">,</span>
+            <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"DEFESA DO CONSUMIDOR"</span>
+        <span class="p">}</span>
+    <span class="p">],</span>
+    <span class="s2">"inLanguage"</span><span class="p">:</span> <span class="s2">"pt-BR"</span><span class="p">,</span>
+    <span class="s2">"description"</span><span class="p">:</span> <span class="s2">"Altera o Decreto nº 8.573, de 19 de novembro de 2015, para estabelecer o Consumidor.gov.br como plataforma oficial da administração pública federal direta, autárquica e fundacional para a autocomposição nas controvérsias em relações de consumo."</span><span class="p">,</span>
+    <span class="s2">"legislationChanges"</span><span class="p">:</span> <span class="p">[</span>
+        <span class="p">{</span>
+            <span class="s2">"@type"</span><span class="p">:</span> <span class="s2">"Legislation"</span><span class="p">,</span>
+            <span class="s2">"description"</span><span class="p">:</span> <span class="s2">"Decreto nº 8.573 de 19/11/2015 (alteração permanente)"</span><span class="p">,</span>
+            <span class="s2">"@id"</span><span class="p">:</span> <span class="s2">"http://www.lexml.gov.br/urn/urn:lex:br:federal:decreto:2015-11-19;8573"</span>
+        <span class="p">}</span>
+    <span class="p">],</span>
+    <span class="s2">"alternateName"</span><span class="p">:</span> <span class="p">[</span>
+        <span class="s2">"DEC-10197-2020-01-02"</span>
+    <span class="p">],</span>
+    <span class="s2">"spatialCoverage"</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">"address"</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">"addressCountry"</span><span class="p">:</span> <span class="s2">"BR"</span><span class="p">,</span>
+            <span class="s2">"@type"</span><span class="p">:</span> <span class="s2">"PostalAddress"</span>
+        <span class="p">},</span>
+        <span class="s2">"@type"</span><span class="p">:</span> <span class="s2">"Country"</span><span class="p">,</span>
+        <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"Brasil"</span><span class="p">,</span>
+        <span class="s2">"@id"</span><span class="p">:</span> <span class="s2">"https://pt.wikipedia.org/wiki/Brasil"</span>
+    <span class="p">},</span>
+    <span class="s2">"encoding"</span><span class="p">:</span> <span class="p">[</span>
+        <span class="p">{</span>
+            <span class="s2">"contentUrl"</span><span class="p">:</span> <span class="s2">"http://legis.senado.leg.br/legislacao/ListaTextoSigen.action?norma=31900545&amp;amp;amp;id=31900552&amp;amp;amp;idBinario=31900556&amp;amp;amp;mime=application/rtf"</span><span class="p">,</span>
+            <span class="s2">"@type"</span><span class="p">:</span> <span class="s2">"LegislationObject"</span><span class="p">,</span>
+            <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"Publicação Original [Decreto nº 10.197 de 02/01/2020]  [Diário Oficial da União  de 03/01/2020] (p. 1, col. 1)"</span><span class="p">,</span>
+            <span class="s2">"legislationLegalValue"</span><span class="p">:</span> <span class="s2">"UnofficialLegalValue"</span><span class="p">,</span>
+            <span class="s2">"@id"</span><span class="p">:</span> <span class="s2">"http://legis.senado.leg.br/legislacao/ListaTextoSigen.action?norma=31900545&amp;amp;amp;id=31900552&amp;amp;amp;idBinario=31900556&amp;amp;amp;mime=application/rtf"</span><span class="p">,</span>
+            <span class="s2">"fileFormat"</span><span class="p">:</span> <span class="s2">"http://www.iana.org/assignments/media-types/text/html"</span>
+        <span class="p">}</span>
+    <span class="p">],</span>
+    <span class="s2">"sdDatePublished"</span><span class="p">:</span> <span class="s2">"2020-01-05"</span><span class="p">,</span>
+    <span class="s2">"sdLicense"</span><span class="p">:</span> <span class="s2">"http://creativecommons.org/licenses/by/4.0/"</span><span class="p">,</span>
+    <span class="s2">"@context"</span><span class="p">:</span> <span class="s2">"http://schema.org/"</span><span class="p">,</span>
+    <span class="s2">"legislationJurisdiction"</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">"address"</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">"addressCountry"</span><span class="p">:</span> <span class="s2">"BR"</span><span class="p">,</span>
+            <span class="s2">"@type"</span><span class="p">:</span> <span class="s2">"PostalAddress"</span>
+        <span class="p">},</span>
+        <span class="s2">"@type"</span><span class="p">:</span> <span class="s2">"Country"</span><span class="p">,</span>
+        <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"Brasil"</span><span class="p">,</span>
+        <span class="s2">"@id"</span><span class="p">:</span> <span class="s2">"https://pt.wikipedia.org/wiki/Brasil"</span>
+    <span class="p">},</span>
+    <span class="s2">"sdPublisher"</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">"@type"</span><span class="p">:</span> <span class="s2">"GovernmentOrganization"</span><span class="p">,</span>
+        <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"Rede de Informação Legislativa e Jurídica Brasileira"</span><span class="p">,</span>
+        <span class="s2">"@id"</span><span class="p">:</span> <span class="s2">"https://www.lexml.gov.br/"</span>
+    <span class="p">},</span>
+    <span class="s2">"datePublished"</span><span class="p">:</span> <span class="s2">"2020-01-03"</span><span class="p">,</span>
+    <span class="s2">"license"</span><span class="p">:</span> <span class="s2">"http://creativecommons.org/licenses/by/4.0/"</span><span class="p">,</span>
+    <span class="s2">"dateCreated"</span><span class="p">:</span> <span class="s2">"2020-01-02"</span><span class="p">,</span>
+    <span class="s2">"legislationDate"</span><span class="p">:</span> <span class="s2">"2020-01-02"</span><span class="p">,</span>
+    <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"Decreto nº 10.197 de 02/01/2020"</span><span class="p">,</span>
+    <span class="s2">"legislationType"</span><span class="p">:</span> <span class="s2">"https://pt.wikipedia.org/wiki/Decreto_legislativo"</span><span class="p">,</span>
+    <span class="s2">"@id"</span><span class="p">:</span> <span class="s2">"http://www.lexml.gov.br/urn/urn:lex:br:federal:decreto:2020-01-02;10197"</span>
+<span class="p">}</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Para apresentar mais um exemplo de <em>query</em> podemos buscar todos os normativos que possuem a tag <code>INTERNET</code> no campo <code>keywords</code>. E chegamos ao resultado que há 40 normativos que tiveram a tag INTERNET atribuída ao seu domínio.</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">tag_internet</span> <span class="o">=</span> <span class="n">db_metadados</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">norma</span><span class="p">[</span><span class="s1">'keywords'</span><span class="p">]</span><span class="o">.</span><span class="n">any</span><span class="p">([</span><span class="s1">'INTERNET'</span><span class="p">]))</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="3.-publicação-do-dataset">
+<a class="anchor" href="#3.-publica%C3%A7%C3%A3o-do-dataset" aria-hidden="true"><span class="octicon octicon-link"></span></a>3. publicação do <em>dataset</em><a class="anchor-link" href="#3.-publica%C3%A7%C3%A3o-do-dataset"> </a>
+</h1>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><img src="/o-eu-analitico/images/copied_from_nb/img/py-lexml-acervo-logo.png" alt="Project image"></p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>O dataset está diposnível no repositório do <a href="https://www.kaggle.com/lexmlacervo/lexml-brasil-acervo">py-lexml-acervo</a> no kaggle com o nome de <code>metadados.json</code> com 93.75 MB.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="4.-aplicação-em-aprendizado-de-máquina">
+<a class="anchor" href="#4.-aplica%C3%A7%C3%A3o-em-aprendizado-de-m%C3%A1quina" aria-hidden="true"><span class="octicon octicon-link"></span></a>4. aplicação em aprendizado de máquina<a class="anchor-link" href="#4.-aplica%C3%A7%C3%A3o-em-aprendizado-de-m%C3%A1quina"> </a>
+</h1>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Ao meu ver o primeiro uso desse dataset para fins de <code>machine learning</code> é um problema de <a href="https://en.wikipedia.org/wiki/Multi-label_classification">classificação multi-label</a>.  Para cada normativo, temos um campo <code>keywords</code> que recebe múltiplas tags que estão relacionadas ao assunto dessa norma jurídica. Além disso, temos o campo <code>about.description</code> que registra a referida <strong>ementa</strong>.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Sabido que esse processo de <em>tagging</em> é, geralmente, realizado por meio de anotação manual, isto é, um profissional do meio jurídico ou alguém atue com publicação de normativos legais irá decidir quais <code>tags</code> são mais apropriadas a esse documento legal. Essa sistemática de trabalho, possui algumas desvantagens, podendo-se citar algumas, dentre as quais:</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<ul>
+<li>Sujeito a falhas, como a maior parte dos procedimentos manuais;</li>
+<li>Falta de uniformidade na classificação;</li>
+<li>Necessidade de uma equipe multidisciplinar disponível para anotação;</li>
+<li>Para o resultado da classificação ser acurado e satisfatório, exige-se um alto custo de homem-hora;</li>
+</ul>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>As características elencadas acima, já mostram razão suficiente para que a tecnologia, por meio de um modelo de aprendizado de máquina auxilie os profissionais no desempenho de suas funções.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<blockquote>
+<p>O papel da tecnologia no mundo jurídico foi recentemente abordada no podcast, <a href="https://hipsters.tech/tecnologia-no-juridico-hipsters-208">hipsters ponto tech</a> 👾.</p>
+</blockquote>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Assim, com o <code>dataset</code> apresentado acreditamos ter um potencial para o desenvolvimento de um <em><a href="https://www.oreilly.com/radar/drivetrain-approach-data-products/">data product</a></em> que poderia ser acoplado a um sistema pré-existente de publicação de atos normativos. Assim, o usuário abdicaria da responsabilidade de inserir manualmente as <code>tags</code> mais apropriadas, e o sistema faria a consulta a API do modelo de aprendizado de máquina e o seu front-end já apresentaria a sugestão das <code>tags</code> mais apropriadas para a norma em análise. Assim, a responsabilidade do usuário seria apenas de <em>validar</em> a sugestão do modelo, de modo a desonerar parte do trabalho intelectual do profissional.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Portanto, a proposição é a criação de um modelo de classificação multi-label, treinando-o sobre as ementas de cada norma. Nas próximas postagens, esperamos continuar explorando esses dados e iniciar o processo de treinamento do modelo. Até mais! 😀</p>
+
+</div>
+</div>
+</div>
+</div>
+
+
+
+  </div><!-- from https://github.com/utterance/utterances -->
+<script src="https://utteranc.es/client.js"
+        repo="netoferraz/o-eu-analitico"
+        issue-term="title"
+        label="blogpost-comment"
+        theme="github-light"
+        crossorigin="anonymous"
+        async>
+</script><a class="u-url" href="/o-eu-analitico/dados%20abertos/governo/crawler/2020/07/07/metadados-normativos-federais.html" hidden></a>
+</article>
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/o-eu-analitico/"></data>
+
+  <div class="wrapper">
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col">
+        <p class="feed-subscribe">
+          <a href="/o-eu-analitico/feed.xml">
+            <svg class="svg-icon orange">
+              <use xlink:href="/o-eu-analitico/assets/minima-social-icons.svg#rss"></use>
+            </svg><span>Subscribe</span>
+          </a>
+        </p>
+      </div>
+      <div class="footer-col">
+        <p>registros de uma jornada para uma vida mais data driven.</p>
+      </div>
+    </div>
+
+    <div class="social-links"><ul class="social-media-list"><li><a rel="me" href="https://github.com/netoferraz" title="netoferraz"><svg class="svg-icon grey"><use xlink:href="/o-eu-analitico/assets/minima-social-icons.svg#github"></use></svg></a></li><li><a rel="me" href="https://twitter.com/zeneto" title="zeneto"><svg class="svg-icon grey"><use xlink:href="/o-eu-analitico/assets/minima-social-icons.svg#twitter"></use></svg></a></li></ul>
+</div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>

@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="210mm"
+   height="297mm"
+   viewBox="0 0 210 297"
+   version="1.1"
+   id="svg9552"
+   inkscape:export-filename="Z:\05_projetos\2019\03_SEME_indicadores\notebooks\Exercise-4\imgs\escala_ph_equal_interval.png"
+   inkscape:export-xdpi="96"
+   inkscape:export-ydpi="96"
+   inkscape:version="0.92.4 (5da689c313, 2019-01-14)"
+   sodipodi:docname="pH_customizado.svg">
+  <defs
+     id="defs9546" />
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="1.979899"
+     inkscape:cx="536.96471"
+     inkscape:cy="856.03602"
+     inkscape:document-units="mm"
+     inkscape:current-layer="layer1"
+     showgrid="false"
+     inkscape:window-width="1920"
+     inkscape:window-height="1017"
+     inkscape:window-x="3832"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1" />
+  <metadata
+     id="metadata9549">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Camada 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <rect
+       id="rect10-2-7-9"
+       width="7.7508163"
+       height="7.7508163"
+       x="82.535942"
+       y="47.525398"
+       style="fill:#fc8d59;fill-opacity:1;stroke:#000000;stroke-width:0.05;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+    <rect
+       id="rect10-9-3-0-2"
+       width="7.7508163"
+       height="7.7508163"
+       x="82.535942"
+       y="56.334526"
+       style="fill:#fee090;fill-opacity:1;stroke:#000000;stroke-width:0.05;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+    <rect
+       id="rect10-8-0-7-8"
+       width="7.7508163"
+       height="7.7508163"
+       x="82.535942"
+       y="65.143677"
+       style="fill:#e0f3f8;fill-opacity:1;stroke:#000000;stroke-width:0.05;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+    <rect
+       id="rect10-8-0-7-5-5"
+       width="7.7508163"
+       height="7.7508163"
+       x="82.535942"
+       y="73.952805"
+       style="fill:#91bfdb;fill-opacity:1;stroke:#000000;stroke-width:0.05;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:10.58333302px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="91.87075"
+       y="52.694725"
+       id="text7685-7"><tspan
+         sodipodi:role="line"
+         id="tspan7683-8"
+         x="91.87075"
+         y="52.694725"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:4.23333311px;font-family:'Berlin Sans FB Demi';-inkscape-font-specification:'Berlin Sans FB Demi';stroke-width:0.26458332">-2 DP &lt; pH &lt;= -1 DP</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:10.58333302px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="91.719765"
+       y="61.719921"
+       id="text7685-8-7"><tspan
+         sodipodi:role="line"
+         id="tspan7683-2-7"
+         x="91.719765"
+         y="61.719921"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:4.23333311px;font-family:'Berlin Sans FB Demi';-inkscape-font-specification:'Berlin Sans FB Demi';stroke-width:0.26458332">-1 DP &lt; pH &lt;= <tspan
+   style="fill:#ff6600"
+   id="tspan10423">7.5</tspan></tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:10.58333302px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="91.959068"
+       y="70.373276"
+       id="text7685-8-0-2-3"><tspan
+         sodipodi:role="line"
+         id="tspan7683-2-4-7-9"
+         x="91.959068"
+         y="70.373276"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:4.23333311px;font-family:'Berlin Sans FB Demi';-inkscape-font-specification:'Berlin Sans FB Demi';stroke-width:0.26458332"><tspan
+   style="fill:#ff6600"
+   id="tspan10425">7.5</tspan> &lt; pH &lt;= +1 DP</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:10.58333302px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="91.619682"
+       y="79.217903"
+       id="text7685-8-0-2-8-2"><tspan
+         sodipodi:role="line"
+         id="tspan7683-2-4-7-0-4"
+         x="91.619682"
+         y="79.217903"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:4.23333311px;font-family:'Berlin Sans FB Demi';-inkscape-font-specification:'Berlin Sans FB Demi';stroke-width:0.26458332">+1 DP &lt; pH &lt;= +2 DP</tspan></text>
+    <rect
+       id="rect10-2-7-9-0"
+       width="7.7508163"
+       height="7.7508163"
+       x="82.535942"
+       y="38.716248"
+       style="fill:#d73027;fill-opacity:1;stroke:#000000;stroke-width:0.05;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:10.58333302px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="91.87075"
+       y="43.885574"
+       id="text7685-7-3"><tspan
+         sodipodi:role="line"
+         id="tspan7683-8-4"
+         x="91.87075"
+         y="43.885574"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:4.23333311px;font-family:'Berlin Sans FB Demi';-inkscape-font-specification:'Berlin Sans FB Demi';stroke-width:0.26458332">0 &lt; pH &lt;= -2 DP</tspan></text>
+    <rect
+       id="rect10-8-0-7-5-5-6"
+       width="7.7508163"
+       height="7.7508163"
+       x="82.535942"
+       y="83.291122"
+       style="fill:#4575b4;fill-opacity:1;stroke:#000000;stroke-width:0.05;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:10.58333302px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="91.619682"
+       y="88.556221"
+       id="text7685-8-0-2-8-2-9"><tspan
+         sodipodi:role="line"
+         id="tspan7683-2-4-7-0-4-8"
+         x="91.619682"
+         y="88.556221"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:4.23333311px;font-family:'Berlin Sans FB Demi';-inkscape-font-specification:'Berlin Sans FB Demi';stroke-width:0.26458332">+2 DP &lt; pH &lt; 14</tspan></text>
+  </g>
+</svg>

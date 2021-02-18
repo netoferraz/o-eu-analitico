@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="twitter:card" content="summary_large_image" /><!-- Begin Jekyll SEO tag v2.6.1 -->
+<title>dados: como classificá-los? | o eu analítico</title>
+<meta name="generator" content="Jekyll v4.1.1" />
+<meta property="og:title" content="dados: como classificá-los?" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="como analisar e classificar dados?" />
+<meta property="og:description" content="como analisar e classificar dados?" />
+<link rel="canonical" href="https://netoferraz.github.io/o-eu-analitico/data%20wrangling/eda/2019/07/29/clf_dados.html" />
+<meta property="og:url" content="https://netoferraz.github.io/o-eu-analitico/data%20wrangling/eda/2019/07/29/clf_dados.html" />
+<meta property="og:site_name" content="o eu analítico" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2019-07-29T00:00:00-05:00" />
+<script type="application/ld+json">
+{"mainEntityOfPage":{"@type":"WebPage","@id":"https://netoferraz.github.io/o-eu-analitico/data%20wrangling/eda/2019/07/29/clf_dados.html"},"url":"https://netoferraz.github.io/o-eu-analitico/data%20wrangling/eda/2019/07/29/clf_dados.html","@type":"BlogPosting","headline":"dados: como classificá-los?","dateModified":"2019-07-29T00:00:00-05:00","datePublished":"2019-07-29T00:00:00-05:00","description":"como analisar e classificar dados?","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/o-eu-analitico/assets/css/style.css"><link type="application/atom+xml" rel="alternate" href="https://netoferraz.github.io/o-eu-analitico/feed.xml" title="o eu analítico" /><!-- the google_analytics_id gets auto inserted from the config file -->
+
+
+
+<script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','//www.google-analytics.com/analytics.js','ga');ga('create','UA-134149444-2','auto');ga('require','displayfeatures');ga('send','pageview');</script>
+
+<link rel="shortcut icon" type="image/x-icon" href="/o-eu-analitico/images/favicon.ico"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Primer/15.2.0/primer.css" integrity="sha512-xTz2ys4coGAOz8vuV1NcQBkgVmKhsSEtjbqyMJbBHRplFuvKIUo6xhLHpAyPt9mfR6twHJgn9OgVLuqOvjeBhg==" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog==" crossorigin="anonymous" /><script src="https://hypothes.is/embed.js" async></script>
+
+<script>
+function wrap_img(fn) {
+    if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading") {
+        var elements = document.querySelectorAll(".post img");
+        Array.prototype.forEach.call(elements, function(el, i) {
+            if (el.getAttribute("title") && (el.className != "emoji")) {
+                const caption = document.createElement('figcaption');
+                var node = document.createTextNode(el.getAttribute("title"));
+                caption.appendChild(node);
+                const wrapper = document.createElement('figure');
+                wrapper.className = 'image';
+                el.parentNode.insertBefore(wrapper, el);
+                el.parentNode.removeChild(el);
+                wrapper.appendChild(el);
+                wrapper.appendChild(caption);
+            }
+        });
+    } else { document.addEventListener('DOMContentLoaded', fn); }
+}
+window.onload = wrap_img;
+</script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function(){
+    // add link icon to anchor tags
+    var elem = document.querySelectorAll(".anchor-link")
+    elem.forEach(e => (e.innerHTML = '<i class="fas fa-link fa-xs"></i>'));
+    });
+</script>
+</head>
+<body><header class="site-header">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/o-eu-analitico/">o eu analítico</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/o-eu-analitico/about/">sobre</a><a class="page-link" href="/o-eu-analitico/search/">pesquisa</a><a class="page-link" href="/o-eu-analitico/categories/">tags</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">dados: como classificá-los?</h1><p class="page-description">como analisar e classificar dados?</p><p class="post-meta post-meta-title"><time class="dt-published" datetime="2019-07-29T00:00:00-05:00" itemprop="datePublished">
+        Jul 29, 2019
+      </time>
+       • <span class="read-time" title="Estimated read time">
+    
+    
+      13 min read
+    
+</span></p>
+
+    
+      <p class="category-tags"><i class="fas fa-tags category-tags-icon"></i></i> 
+      
+        <a class="category-tags-link" href="/o-eu-analitico/categories/#data wrangling">data wrangling</a>
+        &nbsp;
+      
+        <a class="category-tags-link" href="/o-eu-analitico/categories/#eda">eda</a>
+        
+      
+      </p>
+    
+
+    </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <ul class="section-nav">
+<li class="toc-entry toc-h3"><a href="#1-intervalos-iguais-equal-interval">1. intervalos iguais (equal interval)</a></li>
+<li class="toc-entry toc-h3"><a href="#2-quebras-naturais-natural-breaks">2. quebras naturais (natural breaks)</a>
+<ul>
+<li class="toc-entry toc-h5"><a href="#vantagens">vantagens</a></li>
+<li class="toc-entry toc-h5"><a href="#desvantagens">desvantagens</a></li>
+</ul>
+</li>
+<li class="toc-entry toc-h3"><a href="#3-quantis-quantiles">3. quantis (quantiles)</a>
+<ul>
+<li class="toc-entry toc-h5"><a href="#vantagens-1">vantagens</a></li>
+<li class="toc-entry toc-h5"><a href="#desvantagens-1">desvantagens</a></li>
+</ul>
+</li>
+<li class="toc-entry toc-h3"><a href="#4-customizado-user-defined">4. customizado (user defined)</a></li>
+</ul><p>/o-eu-analitico/images/posts/
+A grande maioria dos <a href="https://en.wikipedia.org/wiki/Thematic_map"><strong>mapas temáticos</strong></a> faz uso de algum método para <a href="http://www.gitta.info/Statistics/en/html/StandClass_learningObject2.html"><strong>classificação de dados</strong></a>. O objetivo desse processo é organizar os dados em intervalos de dados ou em classes. A classificação se torna necessária para evitar um nível de granularidade muito elevado tornando a informação incompreensiva. Por outro lado, como apresentado em <i><a href="https://www.ft.com/content/65b5df0e-49ff-11e8-8ee8-cae73aab7ccb"><strong>How to lie with maps</strong></a></i> um agrupamento incorreto pode distorcer a informação. Atualmente, existem programas (<a href="https://www.qgis.org/pt_BR/site/">QGIS</a>, <a href="https://www.arcgis.com/index.html">ArcGIS</a>, <a href="http://geopandas.org/">GeoPandas</a>, etc.) que automatizam a produção de mapas com várias configurações <em>default</em> para “facilitar” a vida do usuário. Todavia, tais facilidades podem esconder armadilhas para usuários menos experientes.</p>
+
+<blockquote>
+  <p>Dados podem ser facilmente <span style="color:#AC4142"><b>distorcidos</b></span> quando analistas sucumbem ao senso de seguir as sugestões padrão das soluções de software. Por exemplo, a maior parte das vezes que um software gera um <a href="https://pt.wikipedia.org/wiki/Mapa_coropl%C3%A9tico">mapa coroplético</a> a classificação utilizada nos dados é realizada por uma segmentação em 5 categorias baseada em intervalos iguais ou por quantis. (Livre Tradução) <i>Lying with Maps</i>, Mark Monmonier, Statistical Science, 2005, Vol. 20, No. 3, 215–222</p>
+</blockquote>
+
+<center><img src="https://media.giphy.com/media/McsujjSqA3a7ogIxHb/giphy.gif" width="55%" height="50%"></center>
+
+<p>Em termos técnicos, o objetivo da classificação de dados é distribuir um conjunto de dados em N categorias, de modo a minimizar <strong>a variância dentro dos grupos e maximizá-la entre os grupos</strong>. Por exemplo, considere o conjunto de dados a seguir, que representa leituras fictícias de <a href="https://pt.wikipedia.org/wiki/PH">pH</a>.</p>
+
+<center><img src="/o-eu-analitico/images/posts/clf_dados/array.png"></center>
+
+<p>Iniciamos o processo com a determinação do <span style="color:#AC4142"><strong>número de classes</strong></span> (<strong>N</strong>) e com a escolha do <span style="color:#AC4142"><strong>método</strong></span> de categorização. A definição de <strong>N</strong> está associado a pergunta: <strong>O quanto de generalização você deseja em seus dados?</strong> Quanto maior for <strong>N</strong> menor será a generalização associada aos dados, todavia, muitas classes poderão implicar em problemas de legibilidade. Dessa forma, o recomendado é algo em torno de 3 a 7 classes. De sorte que, como regra de ouro, um bom início é avaliar o uso de <strong>5 classes</strong>. Quanto ao <strong>método</strong> iremos utilizar o de <strong><a href="http://wiki.gis.com/wiki/index.php/Equal_Interval_classification">intervalo iguais</a>.</strong> Assim<strong>,</strong> calculamos a amplitude (<strong>A</strong>), para pH temos uma escala adimensional entre 0 e 14, portanto, <strong>A = 14</strong>. Para calcular o intervalo intra classe: <strong>A/N=2.8</strong>. Assim, concluímos a definição da distribuição dos dados em diferentes intervalos.</p>
+
+<center><img src="/o-eu-analitico/images/posts/clf_dados/escala_ph_equal_interval.png" width="30%" height="30%"></center>
+
+<p>Uma das características desse método é a criação de classes com tamanho iguais. Todavia, quase sempre haverá uma distribuição desbalanceada dos dados nas diferentes categorias, podendo ocorrer alguma distorção por <a href="https://pt.wikipedia.org/wiki/Erro_amostral">viés amostral</a> em alguma classe, por exemplo. Por outro lado, a decisão de como realizar essa estratificação dos dados <span style="color:#AC4142"><strong>pode</strong></span> levar em conta o <span style="color:#AC4142"><strong>contexto</strong></span> da análise. O pH é uma medida utilizada em diversas áreas profissionais para mensurar o quão alcalino ou ácido um determinado meio é, como bem apresenta a ilustração abaixo do <a href="https://www.notion.so/netoferraz/CLASSIFICADORES-DE-DADOS-0ace9ee9022b4915b22bb03e838135c5#ac4421462c2b4abe803572bf84e08d9c">Guia do Estudante</a>.</p>
+
+<center><img src="/o-eu-analitico/images/posts/clf_dados/escala_pH.png" width="50%" height="50%"></center>
+
+<p>Vamos imaginar que você trabalhe em um órgão ambiental estadual que deve controlar o pH da água do mar das praias de uma cidade. É sabido que a <a href="https://www.portaleducacao.com.br/conteudo/artigos/biologia/potencial-hidrogenionico-ph-da-agua-do-mar/33752">água do mar é levemente alcalina</a>, com pH entre 7,4 a 8,5. Além disso, vamos supor que a série histórica apresente uma média de 7.5 ± 1.2. Uma categorização pode ser efetuada usando-se uma medida de tendência central em conjunto com uma medida de dispersão, como a média e o desvio-padrão (DP), respectivamente. Dessa forma, criamos intervalos contextualizados aos dados. De modo que seja possível avaliar se as leituras de pH estão coerentes com o <span style="color:#AC4142"><strong>target</strong></span>, isto é, a média da série histórica.</p>
+
+<center><img src="/o-eu-analitico/images/posts/clf_dados/pH_DP_example.png" width="40%" height="40%"></center>
+
+<p>A escolha do método de classificação influenciará o trabalho do analista. Ao ponto que histórias distintas podem ser contadas a partir de um mesmo conjunto de dados. Por exemplo, na figura abaixo são mostradas as escalas de cores produzidas por dois métodos distintos. Assim, são nítidas as mudanças de classificação. Portanto, histórias diferentes podem ser contadas a partir dessas escolhas.</p>
+
+<center><img src="/o-eu-analitico/images/posts/clf_dados/tipos_de_classificacao_comparacao_corrigido.png"></center>
+
+<p>Havendo uma compreensão inicial do que são métodos de classificação de dados e o seu objetivo, podemos explorar com maiores detalhes as principais abordagens existentes. Dessa forma, é válido ressaltar que não há uma única maneira de determinar um número de classes ideal e tampouco um melhor método. Assim, o caminho mais seguro é <span style="color:#AC4142"><strong>conhecer</strong></span> os prós e contras de cada abordagem e verificar se ela é apropriada ao seu conjunto de dados em particular.</p>
+
+<center><img src="https://media.giphy.com/media/9MIJgbU0YOhQjddI92/giphy.gif" width="55%" height="50%"></center>
+
+<p>Achou que iria ser <span style="color:#AC4142"><strong>molezinha</strong></span>? Eu também! Mas vamos lá, que não é tão complicado quanto pode parecer. Nesse post, vamos detalhar 4 dos classificadores mais utilizados:</p>
+
+<ol>
+  <li>Intervalos iguais (<i>Equal Interval</i>)</li>
+  <li>Quebras naturais (<i>Natural Breaks</i>)</li>
+  <li>Quantis (<i>Quantiles</i>)</li>
+  <li>Customizado (<i>User Defined</i>)</li>
+</ol>
+
+<p>A  <span style="color:#AC4142"><strong>Análise Exploratória de Dados (AED)</strong></span>, disseminada pelo cientista <a href="https://pt.wikipedia.org/wiki/John_Tukey">John Tukey</a>, permanece importante nos dias atuais. Várias das técnicas propostas, a serem realizadas durante o processo de <span style="color:#AC4142"><strong>AED</strong></span>, nos auxiliarão na tomada de decisão de qual método de classificação é mais apropriado para os seus dados. Para uma melhor compreensão do tópico, convoquei dois personagens que irão me auxiliar a melhor apresentar o assunto. São eles: <strong>Seu Creysson</strong> e <strong>Bino</strong>. Os dois atuarão como facilitadores de aprendizagem, em que o <strong>Seu Creysson</strong> sempre fará os apontamentos que são considerados <u>corretos</u>, enquanto o <strong>Bino</strong> se encarregará de indicar onde estão as <u>ciladas</u>.</p>
+
+<center><img src="/o-eu-analitico/images/posts/clf_dados/facilitadores_de_aprendizagem2.png"></center>
+
+<h3 id="1-intervalos-iguais-equal-interval">
+<a class="anchor" href="#1-intervalos-iguais-equal-interval" aria-hidden="true"><span class="octicon octicon-link"></span></a>1. intervalos iguais (<i>equal interval</i>)</h3>
+
+<p>Como mencionado, serão nossos aliados a <span style="color:#AC4142"><strong>AED</strong></span>, a compreensão da distribuição dos dados - por meio de histogramas e de outras visualizações - e o entedimento do assunto estudado.</p>
+
+<center><img src="/o-eu-analitico/images/posts/clf_dados/EAD_data_structure.PNG"></center>
+
+<p>O método de <span style="color:#AC4142"><strong>intervalos iguais</strong></span> realiza uma divisão em classes com intervalos de mesmo tamanho, sendo mais apropriado a dados que se distribuam de forma semelhante por toda a amplitude do dataset. A seguir, temos como exemplo a categorização de um conjunto de dados arbitrário, que possui uma amplitude 100 unidades. Efetuamos a divisão do conjunto em 5 classes, com 20 unidades associadas a cada classe.</p>
+
+<center><img src="/o-eu-analitico/images/posts/clf_dados/equal_interval_example.png"></center>
+
+<p>O conhecimento sobre as mais diversas <a href="https://pt.wikipedia.org/wiki/Distribui%C3%A7%C3%A3o_de_probabilidade">distribuições de probabilidade</a> será um aliado importante na tomada de decisão de como classificar os dados. O método de intervalos iguais se apresenta como uma boa opção para dados que se apresentem como uma <a href="https://pt.wikipedia.org/wiki/Distribui%C3%A7%C3%A3o_uniforme">distribuição uniforme</a>. Todavia, se os dados apresentarem <a href="https://pt.wikipedia.org/wiki/Assimetria_(estat%C3%ADstica)">assimetria</a> em alguma das direções ou sejam detectados pontos extremos (<a href="https://pt.wikipedia.org/wiki/Outlier">outliers</a>), pode ser que alguma categoria fique vazia. Para melhor exemplificar esse conceito, utilizei as bibliotecas <a href="https://numpy.org/">Numpy</a> - para gerar dados amostrados de diferentes distribuições- e a <a href="https://pysal.readthedocs.io/en/latest/">PySAL</a> - para avaliar diferentes classificadores.</p>
+
+<p>Ao gerar dois <i>datasets</i>, o primeiro a partir de uma <a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.random.uniform.html">distribuição uniforme</a> e outro a partir de uma <a href="https://docs.scipy.org/doc/numpy-1.15.1/reference/generated/numpy.random.lognormal.html">distribuição log-normal</a>, foi realizado uma classificação por <span style="color:#AC4142"><strong>intervalos iguais</strong></span> com 5 classes. A figura abaixo, com auxílio dos nossos facilitadores de aprendizagem, ilustra bem os exemplos de casos adequados e inadequados de uso desse tipo de classificador. No histograma da esquerda, temos um padrão de dados bem distribuídos em torno de toda a amplitude, configurando o caso ideal de uso desse tipo de classificador. Ao contrário, no da direita, temos uma distriuição com uma <a href="https://pt.wikipedia.org/wiki/Assimetria_(estat%C3%ADstica)">assimetria positiva</a>, concentrando a maior parte dos valores na primeira classe, além do fato de que uma das classes ficou sem nenhum valor associado.</p>
+
+<center><img src="/o-eu-analitico/images/posts/clf_dados/equal_interval_indicacao_corrigido.png"></center>
+
+<p>Como <span style="color:#AC4142"><strong>vantagem</strong></span> desse tipo de classificação, temos legendas que são mais fáceis de interpretar para audiências não técnicas. No tocante à <span style="color:#AC4142"><strong>desvantagem</strong></span>, para dados com distribuições não uniformes, poderão haver agrupamentos desproporcionais em apenas uma ou duas classes.</p>
+
+<h3 id="2-quebras-naturais-natural-breaks">
+<a class="anchor" href="#2-quebras-naturais-natural-breaks" aria-hidden="true"><span class="octicon octicon-link"></span></a>2. quebras naturais (<i>natural breaks</i>)</h3>
+
+<p>Esse método também é conhecido por Jenks - em homenagem ao inventor <a href="http://wiki.gis.com/wiki/index.php/George_F._Jenks">George Frederick Jenks</a> - e se utiliza de um algoritmo para minimizar a variação em cada grupo. Assim, quando a informação for apresentada em um mapa, as cores tenderão a aparecer mais distribuídas ao longo de toda visualização. O processo de otimização passa por uma iteração em que o algoritmo busca uma <span style="color:#AC4142"><strong>minimização</strong></span> da variância dentro dos grupos (agrupando os semelhantes), e <span style="color:#AC4142"><strong>maximizando</strong></span> as diferenças entre os grupos (separando os distintos). Além disso, as fronteiras de delimitação das classes são demarcadas nas descontinuidades da distribuição de dados. Portanto, esse método é indicado para ser utilizado em <span style="color:#AC4142"><strong>distribuições não normais e não uniformes</strong></span>. A seguir podemos listar algumas características desse método:</p>
+
+<h5 id="vantagens">
+<a class="anchor" href="#vantagens" aria-hidden="true"><span class="octicon octicon-link"></span></a>vantagens</h5>
+
+<ul>
+  <li>Mapear valores que não são igualmente distribuídos ao longo da distribuição, resultando em classes mais balanceadas;</li>
+  <li>As classes geradas possuem o máximo possível de homogeniedade interna;</li>
+</ul>
+
+<h5 id="desvantagens">
+<a class="anchor" href="#desvantagens" aria-hidden="true"><span class="octicon octicon-link"></span></a>desvantagens</h5>
+
+<ul>
+  <li>O mapeamento em classes é inerente ao conjunto de dados em análise, portanto, há uma dificuldade em comparar mapas relacionados a datasets distintos;</li>
+  <li>Os resultados são bons apenas se existirem descontinuidades na distribuição de dados;</li>
+</ul>
+
+<p>Para representar o que foi explicado acima, foi utilizado o <a href="https://numpy.org/">NumPy</a> para criar um amostra de 1000 valores oriundos de uma <a href="https://docs.scipy.org/doc/numpy-1.15.0/reference/generated/numpy.random.binomial.html">distribuição binomial</a>. Por conseguinte, foi realizada a classificação utilizando os métodos de <span style="color:#AC4142"><strong>quebras naturais</strong></span> e <span style="color:#AC4142"><strong>intervalos iguais</strong></span> com 5 classes. A ilustração abaixo apresenta o resultado desse comparativo, onde é possível atestar que a distribuição binomial apresenta algumas descontinuidades. Essa característica configura um dos requisitos de eficácia para o sucesso do algoritmo <span style="color:#AC4142"><strong>Jenks</strong></span>. Como resultado, é possível constatar uma distribuição mais homogênea dos valores entre as 5 classes no histograma da esquerda quando comparado ao da direita.</p>
+
+<center><img src="/o-eu-analitico/images/posts/clf_dados/facilitadores_natural_breaks_resized.png"></center>
+
+<p>Os histogramas acima apresentam as diferenças entre os métodos comparados. Todavia, o impacto dessa classificação para dados apresentados em um mapa é ainda mais relevante. Considere o <a href="http://www.anp.gov.br/precos-e-defesa-da-concorrencia/precos/levantamento-de-precos">Levantamento de Preços e de Margens de Comercialização de Combustíveis</a> realizado pela <a href="http://www.anp.gov.br/">Agência Nacional do Petróleo, Gás Natural e Biocombustíveis (ANP)</a>. Os mapas abaixo apresentam a <span style="color:#AC4142"><strong>variação acumulada</strong></span> do preço do gás de cozinha (GLP) - em base nominal - entre janeiro de 2013 a junho de 2019. Logo, quando os dados são classificados pelo método de quebras naturais temos um maior número de estados associados as duas últimas categorias. Assim, evidencia-se que estados do Norte e Nordeste tiveram aumentos percentuais maiores que as demais regiões do país.</p>
+
+<center><img src="/o-eu-analitico/images/posts/clf_dados/mapa_natural_break_equal_interval_resized.png"></center>
+
+<h3 id="3-quantis-quantiles">
+<a class="anchor" href="#3-quantis-quantiles" aria-hidden="true"><span class="octicon octicon-link"></span></a>3. quantis (<i>quantiles</i>)</h3>
+
+<p>A classificação por quantis tenta alocar um mesmo número de observações por classe. Portanto, conjuntos de dados que estão  <span style="color:#AC4142"><strong>distribuídos de forma homogênea</strong></span> ao longo de toda a distribuição se beneficiam desse tipo de abordagem. A seguir listamos algumas características desse método:</p>
+
+<h5 id="vantagens-1">
+<a class="anchor" href="#vantagens-1" aria-hidden="true"><span class="octicon octicon-link"></span></a>vantagens</h5>
+
+<ul>
+  <li>É possível enfatizar as posições relativas a determinados valores. Por exemplo, quais observações pertencem aos 20% maiores valores do conjunto de dados?</li>
+</ul>
+
+<h5 id="desvantagens-1">
+<a class="anchor" href="#desvantagens-1" aria-hidden="true"><span class="octicon octicon-link"></span></a>desvantagens</h5>
+
+<ul>
+  <li>Valores que pertecem a uma mesma classe podem ser muito diferentes, particularmente, se os dados não estão distribuídos de forma homogênea ao longo da amplitude;</li>
+  <li>O contrário também pode acontecer, que é o caso de observações muitos próximas serem atribuídas a classes distintas.</li>
+</ul>
+
+<p>Para contornar as desvantagens relatadas acima, uma possível abordagem é alterar o número de classes. De modo a apresentar o uso desse método, foi gerada uma amostra com 1000 observações oriundas de uma <a href="https://docs.scipy.org/doc/numpy-1.15.0/reference/generated/numpy.random.rayleigh.html">distribuição rayleigh</a>, alocando esses dados em 5 classes distintas, uma pelo método dos <span style="color:#AC4142"><strong>quantis</strong></span> e outra por <span style="color:#AC4142"><strong>intervalos iguais</strong></span>. A ilustração abaixo apresenta a comparação. Como esperado, o primeiro método distribuiu 200 observações por classe, enquanto o segundo concentra 67% dos valores em apenas duas categorias.</p>
+
+<center><img src="/o-eu-analitico/images/posts/clf_dados/tipos_de_classificacao_comparacao_quantile_equal_interval_resized.png"></center>
+
+<p>É importante realçar a <span style="color:#AC4142"><strong>diferença de abordagem</strong></span> desses dois métodos. A por <span style="color:#AC4142"><strong>quantis</strong></span> se propõe a alocar <u>uma mesma quantidade de observações por classe</u>, independentemente da amplitude dessas. Enquanto a segunda preza pelo estabelecimento de classes com intervalos de mesma grandeza, sem ter o compromisso com o quantitativo de observações vinculadas a cada uma delas. De fato, esse método pode gerar classes sem nenhuma observação vinculada.</p>
+
+<p>A importância de realizar uma <span style="color:#AC4142"><strong>AED</strong></span> de modo a definir a melhor estratégia de classificação é apresentada a seguir. Usamos os dados do <a href="https://censo2010.ibge.gov.br/">censo de 2010</a> para construir um mapa coroplético da população por município do estado de São Paulo.</p>
+
+<p>A ilustração abaixo resume os processos realizados até o momento de plotar o mapa. A primeira etapa <span style="color:#AC4142"><strong>[a]</strong></span> consiste na construção de um <a href="https://seaborn.pydata.org/generated/seaborn.stripplot.html">strip plot</a> para avaliar a distribuição ao longo de toda amplitude. Além disso, é possível constatar que os dados se espalham por mais de sete ordens de grandeza, onde a maior parte deles formam uma nuvem de sobreposições no ínicio da escala. Nesse domínio, destacam-se municípios muito populosos, como o caso de São Paulo.</p>
+
+<center><img src="/o-eu-analitico/images/posts/clf_dados/tipo_classificao_populacao_sp_comparativo_homogenous_colors.png"></center>
+
+<p>Uma abordagem para analisar dados que possuem outliers extremos como os apresentados no gráfico <span style="color:#AC4142"><strong>[a]</strong></span> é fazer uma transformação para uma outra escala, por exemplo, a logarítimica. O gráfico <span style="color:#AC4142"><strong>[b]</strong></span> apresenta o resultado dessa transformação. Desse modo, a distribuição dos dados fica mais evidente, tornando possível identificar o município de Borá que possui o menor número de habitantes registrado naquele censo, com apenas 805 habitantes. Diante disso, foi possível aplicar um método de classificação, como o por quantis, como bem ilustra o histograma do gráfico <span style="color:#AC4142"><strong>[c]</strong></span>. Por fim, foi possível construir o mapa coroplético <span style="color:#AC4142"><strong>[d]</strong></span> com os municípios associados a intervalos populacionais mais adequados.</p>
+
+<p>Demonstramos, até aqui, a importância da escolha adequada de um método de classificação para uma melhor apresentação dos dados. No caso da produção de mapas, os padrões espaciais apresentados serão dependentes do classificador utilizado. Portanto, padrões que existam em um determinado mapa poderão não existir em outro que tenha usado um classificador diferente. Para melhor compreender essas diferenças, observem a ilustração abaixo, que apresenta o uso de diferentes classificadores para um mesmo conjunto de dados. Assim, é possível constatar a diferença nos padrões de mapeamento quando são utilizadas técnicas diferentes.</p>
+
+<center><img src="/o-eu-analitico/images/posts/clf_dados/comparativo_tres_classificadores_print.png"></center>
+
+<h3 id="4-customizado-user-defined">
+<a class="anchor" href="#4-customizado-user-defined" aria-hidden="true"><span class="octicon octicon-link"></span></a>4. customizado (<i>user defined</i>)</h3>
+
+<p>Lembram que mencionei que o conhecimento da regra de negócio associada aos dados é importante? Pois bem: e se o analista julgar que <span style="color:#AC4142"><strong>nenhuma</strong></span> das abordagens tradicionais se aplica ao conjunto de dados em análise? Nesse momento, entrará em campo a <i>expertise</i> de negócio, tanto para customizar as fronteiras entre as classes, quanto para definir a melhor forma de distribuir os dados em intervalos customizados. Portanto, faça uso de todas as suas habilidades como analista e explore diversas técnicas - em seu cinto de utilidades de cientista de dados - <span style="color:#AC4142"><strong>para uma tomada de decisão mais assertiva</strong></span>.</p>
+
+<center><img src="https://media.giphy.com/media/xl3Biy7X0kRlzlQBx4/giphy.gif"></center>
+
+<p>Assim como proposto, apresentamos 4 abordagens de como classificar dados para construir melhores mapas. Além disso, esse post não esgota todas as opções de classificadores, mas acredito que consiste numa boa introdução a quem deseja compreender as nuances envolvidas na apresentação de dados espaciais. Àqueles que desejam procurar uma fonte de informação para aprofundar seus conhecimentos, indico o livro <a href="https://www.amazon.com.br/Designing-Better-Maps-Guide-Users/dp/1589484401">Designing Better Maps</a> da autora Cynthia Brewer, a mesma que criou a excelente ferramenta <a href="http://colorbrewer2.org/">Color Brewer</a>.</p>
+
+<p>Por fim, mas não menos importante, gostaria de agradecer aos meu amigos <strong><a href="https://www.linkedin.com/in/rnmourao/">Roberto Mourão</a></strong>,  <strong><a href="https://www.linkedin.com/in/paulochf/">Paulo Haddad</a></strong>, <strong><a href="https://www.linkedin.com/in/fernando-almeida-barbalho-00623640/">Fernando Barbalho</a></strong>&lt;/span&gt; e <strong><a href="https://www.linkedin.com/in/romualdoalves/">Romualdo Alves</a></strong> pelas valiosas contribuições a esse texto. Fica aqui o meu muito-obrigado!</p>
+
+<p><code class="language-plaintext highlighter-rouge">E aí gostou do post? Tem alguma sugestão ou dúvida? Deixe um comentário e até a próxima!</code></p>
+
+
+  </div><!-- from https://github.com/utterance/utterances -->
+<script src="https://utteranc.es/client.js"
+        repo="netoferraz/o-eu-analitico"
+        issue-term="title"
+        label="blogpost-comment"
+        theme="github-light"
+        crossorigin="anonymous"
+        async>
+</script><a class="u-url" href="/o-eu-analitico/data%20wrangling/eda/2019/07/29/clf_dados.html" hidden></a>
+</article>
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/o-eu-analitico/"></data>
+
+  <div class="wrapper">
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col">
+        <p class="feed-subscribe">
+          <a href="/o-eu-analitico/feed.xml">
+            <svg class="svg-icon orange">
+              <use xlink:href="/o-eu-analitico/assets/minima-social-icons.svg#rss"></use>
+            </svg><span>Subscribe</span>
+          </a>
+        </p>
+      </div>
+      <div class="footer-col">
+        <p>registros de uma jornada para uma vida mais data driven.</p>
+      </div>
+    </div>
+
+    <div class="social-links"><ul class="social-media-list"><li><a rel="me" href="https://github.com/netoferraz" title="netoferraz"><svg class="svg-icon grey"><use xlink:href="/o-eu-analitico/assets/minima-social-icons.svg#github"></use></svg></a></li><li><a rel="me" href="https://twitter.com/zeneto" title="zeneto"><svg class="svg-icon grey"><use xlink:href="/o-eu-analitico/assets/minima-social-icons.svg#twitter"></use></svg></a></li></ul>
+</div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>
